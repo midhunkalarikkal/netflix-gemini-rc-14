@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidateData } from '../utils/validations';
 
 const Login = () => {
 
-  const [isSignInForm , setIsSignInForm] = useState(true)
+  const [isSignInForm , setIsSignInForm] = useState(true);
+
+  const [errMessage , setErrMessage] = useState(null)
+
+  const email = useRef(null);
+  const password = useRef(null);
+
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm)
   }
+
+  const handleSubmitButton = (e) => {
+    const message = checkValidateData(email.current.value , password.current.value)
+    setErrMessage(message)
+  }
+
   return (
     <div>
       <Header />
@@ -17,7 +30,7 @@ const Login = () => {
           alt=""
         />
       </div>
-      <form className="absolute p-12 bg-black w-3/12 flex flex-col my-64 mx-auto right-0 left-0 text-white bg-opacity-80">
+      <form onSubmit={(e)=> e.preventDefault()} className="absolute p-12 bg-black w-3/12 flex flex-col my-64 mx-auto right-0 left-0 text-white bg-opacity-80">
         <h1 className="font-bold text-3xl py-4">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
         {!isSignInForm && (
           <input
@@ -27,16 +40,19 @@ const Login = () => {
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email Address"
           className="p-4 my-4 w-full bg-black text-white bg-opacity-20 border-[1px] border-gray-300 rounded-md focus:border-white focus:outline-none"
         />
         <input
+          ref={password}
           type="Password"
           placeholder="Password"
           className="p-4 my-4 w-full bg-black text-white bg-opacity-80 border-[1px] border-gray-300 rounded-md focus:border-white focus:outline-none"
         />
-        <button className="px-4 py-2 my-2 w-full font-semibold rounded-md" style={{ backgroundColor: '#E50914' }}>{isSignInForm ? "Sign In" : "Sign Up"}</button>
+        <p className="py-2 font-semibold text-md text-red-600">{errMessage}</p>
+        <button className="px-4 py-2 my-2 w-full font-semibold rounded-md" style={{ backgroundColor: '#E50914' }} onClick={handleSubmitButton}>{isSignInForm ? "Sign In" : "Sign Up"}</button>
         <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>{isSignInForm ? "New to netflix? Sign Up." : "Already registered? Sign In Now."}</p>
       </form>
     </div>
