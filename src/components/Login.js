@@ -8,6 +8,7 @@ const Login = () => {
 
   const [errMessage , setErrMessage] = useState(null)
 
+  const name = useRef(null)
   const email = useRef(null);
   const password = useRef(null);
 
@@ -16,7 +17,7 @@ const Login = () => {
   }
 
   const handleSubmitButton = (e) => {
-    const message = checkValidateData(email.current.value , password.current.value)
+    const message = checkValidateData(email.current.value , password.current.value , name.current.value)
     setErrMessage(message)
   }
 
@@ -34,6 +35,7 @@ const Login = () => {
         <h1 className="font-bold text-3xl py-4">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
         {!isSignInForm && (
           <input
+          ref={name}
           type="text"
           placeholder="Full Name"
           className="p-4 my-4 w-full bg-black text-white bg-opacity-20 border-[1px] border-gray-300 rounded-md focus:border-white focus:outline-none"
