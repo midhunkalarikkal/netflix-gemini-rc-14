@@ -6,10 +6,9 @@ const MovieList = ({ title, movies }) => {
       <h3 className="text-white font-bold  text-3xl py-4">{title}</h3>
       <div className="flex overflow-x-scroll no-scrollbar">
         <div className="flex space-x-4">
-          {movies.nowPlayingMovies &&
-            movies.nowPlayingMovies.map((movie) => (
-              <MovieCard key={movie.id} posterPath={movie.poster_path} />
-            ))}
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} posterPath={movie.poster_path} />
+          ))}
         </div>
       </div>
     </div>
