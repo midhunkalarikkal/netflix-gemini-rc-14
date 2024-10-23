@@ -1,25 +1,16 @@
 import Header from "./Header";
-import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
 
 const Browse = () => {
-
-  useGetNowPlayingMovies()
+  useGetNowPlayingMovies();
 
   return (
     <div>
       <Header />
       <MainContainer />
       <SecondaryContainer />
-      {/* 
-        Main container
-          - video background
-          - video title
-        Secondary container
-          - movie lists * n
-          - cards * n
-      */}
     </div>
   );
 };

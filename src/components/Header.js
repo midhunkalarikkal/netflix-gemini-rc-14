@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
 import { auth } from "../utils/firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import React , { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LOGO , USER_LOGO } from '../utils/constants';
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO , USER_LOGO } from '../utils/constants';
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const user = useSelector((store) => store.user);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -22,12 +23,10 @@ const Header = () => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-            // sign in / sign up
           const {uid, email , displayName} = user
           dispatch(addUser({uid : uid, email : email, displayName : displayName}))
           navigate('/browse');
         } else {
-            // sign out
             dispatch(removeUser())
             navigate('/');
         }
@@ -38,7 +37,7 @@ const Header = () => {
 
   return (
     <div className="absolute flex px-10 py-2 bg-gradient-to-b from-black w-full z-50">
-      <div className="">
+      <div>
         <img
           className="w-44 cursor-pointer"
           src={LOGO}

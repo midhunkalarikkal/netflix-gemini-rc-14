@@ -1,20 +1,19 @@
-import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import React, { useRef, useState } from "react";
 import { checkValidateData } from "../utils/validations";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
 
 const Login = () => {
-
   const [isSignInForm, setIsSignInForm] = useState(true);
-  const [errMessage, setErrMessage] = useState(null);
 
+  const [errMessage, setErrMessage] = useState(null);
   const dispatch = useDispatch();
 
   const name = useRef(null);
