@@ -36,16 +36,16 @@ const Header = () => {
 },[])
 
   return (
-    <div className="absolute flex px-10 py-2 bg-gradient-to-b from-black w-full z-50">
-      <div>
+    <div className="absolute flex px-10 py-2 w-full z-50 h-18">
+      <div className="w-1/2">
         <img
-          className="w-44 cursor-pointer"
+          className="w-36 cursor-pointer ml-36 py-4"
           src={LOGO}
           alt="Netflix_logo"
         />
       </div>
       {user && (
-        <div className="flex ml-auto items-center justify-between w-auto space-x-4 p-5">
+        <div className="flex ml-auto items-center justify-between w-auto space-x-4 p-5 w-1/2">
           <h4 className='font-semiBold text-white'>Hi, {user.displayName}</h4>
           <img
             className="w-8 object-cover rounded-lg"

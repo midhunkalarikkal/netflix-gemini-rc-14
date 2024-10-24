@@ -9,6 +9,8 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { LOGIN_BG_IMAGE } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -78,20 +80,21 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <>
       <Header />
       <div className="absolute">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent z-1 opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black to-black opacity-50" />
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/7c0e18aa-2c95-474d-802e-7f30e75dcca4/web/IN-en-20241014-TRIFECTA-perspective_e7121311-c11e-4809-a3e6-22abffa33569_large.jpg"
-          alt=""
+          className="w-screen h-[90vh]"
+          src={LOGIN_BG_IMAGE}
+          alt="background_image"
         />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute p-12 bg-black w-3/12 flex flex-col my-64 mx-auto right-0 left-0 text-white bg-opacity-80"
+        className="absolute py-10 px-16 bg-black w-3/12 flex flex-col my-24 mx-auto right-0 left-0 text-white bg-opacity-75"
       >
-        <h1 className="font-bold text-3xl py-4">
+        <h1 className="font-bold text-3xl py-3 mb-3">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
@@ -99,36 +102,53 @@ const Login = () => {
             ref={name}
             type="text"
             placeholder="Full Name"
-            className="p-4 my-4 w-full bg-black text-white bg-opacity-20 border-[1px] border-gray-300 rounded-md focus:border-white focus:outline-none"
+            className="p-4 my-4 w-full bg-black text-white bg-opacity-20 border-[1px] border-gray-300 rounded-sm focus:border-white focus:outline-none"
           />
         )}
         <input
           ref={email}
           type="text"
           placeholder="Email Address"
-          className="p-4 my-4 w-full bg-black text-white bg-opacity-20 border-[1px] border-gray-300 rounded-md focus:border-white focus:outline-none"
+          className="p-4 my-2 w-full bg-black text-white bg-opacity-20 border-[1px] border-gray-300 rounded-sm focus:border-white focus:outline-none"
         />
         <input
           ref={password}
-          type="Password"
+          type="password"
           placeholder="Password"
-          className="p-4 my-4 w-full bg-black text-white bg-opacity-80 border-[1px] border-gray-300 rounded-md focus:border-white focus:outline-none"
+          className="p-4 my-2 w-full bg-black text-white bg-opacity-80 border-[1px] border-gray-300 rounded-sm focus:border-white focus:outline-none"
         />
         <p className="py-2 font-semibold text-md text-red-600">{errMessage}</p>
         <button
-          className="px-4 py-2 my-2 w-full font-semibold rounded-md"
+          className="px-4 py-2 w-full font-semibold rounded-sm"
           style={{ backgroundColor: "#E50914" }}
           onClick={handleSubmitButton}
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
+        <span className="px-2 text-white text-center">OR</span>
+        <button className="px-4 py-2 my-2 w-full font-semibold rounded-sm bg-white bg-opacity-25 hover:bg-opacity-20 transition duration-200 ease-in-out transform">
+          Use a sign-in code
+        </button>
+        <Link to="/" className="my-2 text-center text-white">
+          Forgot password?
+        </Link>
+        <div className="flex items-center my-2">
+          <input className="h-4 w-4 cursor-pointer custom-checkbox rounded-sm" type="checkbox" id="rememberMe"/>
+          <label htmlFor="rememberMe" className="ml-2">
+            Remember me
+          </label>
+        </div>
         <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
           {isSignInForm
-            ? "New to netflix? Sign Up."
-            : "Already registered? Sign In Now."}
+            ? <span><span style={{ color : "##ffffffb3" }}> New to Netflix?</span> Sign Up.</span>
+            : <span><span style={{ color : "##ffffffb3" }}>Already registered?</span> Sign In Now.</span>}
+        </p>
+        <p className="text-gray-400 text-[13px] pb-28">
+          This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}
+          <span className="text-blue-600">Learn more.</span>
         </p>
       </form>
-    </div>
+    </>
   );
 };
 

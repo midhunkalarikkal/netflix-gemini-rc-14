@@ -26,3 +26,38 @@ body::-webkit-scrollbar {
     scrollbar-width: none;
   }
 }
+
+a {
+  color: white;
+}
+
+.custom-checkbox {
+  appearance: none; 
+  background-color: black; 
+  border: 1px solid white; 
+  border-radius: 3px; 
+  cursor: pointer; 
+  position: relative; 
+  outline: none; 
+  transition: background-color 0.2s; 
+}
+
+.custom-checkbox:checked {
+  background-color: white; 
+}
+
+.custom-checkbox:checked:before {
+  content: '✓'; 
+  position: absolute;
+  color: black;
+  transform: sclae(.8); 
+  top: -5px; 
+  left: 1px; 
+  border-radius: 3px; 
+}
+
+.custom-checkbox:hover {
+  background-color: gray; 
+}
+
+
