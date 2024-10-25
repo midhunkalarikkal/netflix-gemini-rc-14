@@ -33,7 +33,7 @@ const Header = () => {
       });
 
       return () => unSubscribe();
-},[])
+},[dispatch, navigate])
 
   return (
     <div className="absolute flex px-10 py-2 w-full z-50 h-18">
@@ -45,7 +45,7 @@ const Header = () => {
         />
       </div>
       {user && (
-        <div className="flex ml-auto items-center justify-between w-auto space-x-4 p-5 w-1/2">
+        <div className="flex ml-auto items-center justify-between w-auto space-x-4 p-5">
           <h4 className='font-semiBold text-white'>Hi, {user.displayName}</h4>
           <img
             className="w-8 object-cover rounded-lg"
