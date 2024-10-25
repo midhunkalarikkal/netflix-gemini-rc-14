@@ -9,7 +9,7 @@ const VideoTitle = ({ original_title, overview, id }) => {
     <div className="absolute bg-gradient-to-r from-black w-screen aspect-video">
       <div className="absolute bottom-36 left-8  p-4 text-white">
         {movieMetaData?.logo ? (
-          <img className="w-56" src={IMG_CDN + movieMetaData?.logo} alt="movie_title" />
+          <img className="w-72" src={IMG_CDN + movieMetaData?.logo} alt="movie_title"/>
         ) : (
           <h1 className="font-bold text-6xl">{original_title}</h1>
         )}
