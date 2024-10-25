@@ -85,14 +85,14 @@ const Login = () => {
       <div className="absolute">
         <div className="absolute inset-0 bg-gradient-to-b from-black to-black opacity-50" />
         <img
-          className="w-screen h-[90vh]"
+          className="w-screen h-[90vh] object-cover"
           src={LOGIN_BG_IMAGE}
           alt="background_image"
         />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute py-10 px-16 bg-black w-3/12 flex flex-col my-24 mx-auto right-0 left-0 text-white bg-opacity-75"
+        className="absolute py-10 px-16 bg-black w-[26%] flex flex-col my-24 mx-auto right-0 left-0 text-white bg-opacity-75"
       >
         <h1 className="font-bold text-3xl py-3 mb-3">
           {isSignInForm ? "Sign In" : "Sign Up"}
@@ -102,48 +102,48 @@ const Login = () => {
             ref={name}
             type="text"
             placeholder="Full Name"
-            className="p-4 my-4 w-full bg-black text-white bg-opacity-20 border-[1px] border-gray-300 rounded-sm focus:border-white focus:outline-none"
+            className="p-4 my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
           />
         )}
         <input
           ref={email}
           type="text"
-          placeholder="Email Address"
-          className="p-4 my-2 w-full bg-black text-white bg-opacity-20 border-[1px] border-gray-300 rounded-sm focus:border-white focus:outline-none"
+          placeholder="Email or mobile number"
+          className="p-4 my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
         />
         <input
           ref={password}
           type="password"
           placeholder="Password"
-          className="p-4 my-2 w-full bg-black text-white bg-opacity-80 border-[1px] border-gray-300 rounded-sm focus:border-white focus:outline-none"
+          className="p-4 my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
         />
         <p className="py-2 font-semibold text-md text-red-600">{errMessage}</p>
         <button
-          className="px-4 py-2 w-full font-semibold rounded-sm"
+          className="px-4 py-2 -mt-2 w-full font-semibold rounded-[4px]"
           style={{ backgroundColor: "#E50914" }}
           onClick={handleSubmitButton}
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <span className="px-2 text-white text-center">OR</span>
-        <button className="px-4 py-2 my-2 w-full font-semibold rounded-sm bg-white bg-opacity-25 hover:bg-opacity-20 transition duration-200 ease-in-out transform">
+        <span className="px-2 text-white text-center py-2">OR</span>
+        <button className="px-4 py-2 my-2 w-full font-semibold rounded-[4px] bg-white bg-opacity-25 hover:bg-opacity-20 transition duration-200 ease-in-out transform">
           Use a sign-in code
         </button>
         <Link to="/" className="my-2 text-center text-white">
           Forgot password?
         </Link>
-        <div className="flex items-center my-2">
-          <input className="h-4 w-4 cursor-pointer custom-checkbox rounded-sm" type="checkbox" id="rememberMe"/>
+        <div className="flex items-center mt-2">
+          <input className="h-4 w-4 cursor-pointer custom-checkbox rounded-[4px]" type="checkbox" id="rememberMe"/>
           <label htmlFor="rememberMe" className="ml-2">
             Remember me
           </label>
         </div>
-        <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
+        <p className="py-4 cursor-pointer -mt-1 mb-2" onClick={toggleSignInForm}>
           {isSignInForm
-            ? <span><span style={{ color : "##ffffffb3" }}> New to Netflix?</span> Sign Up.</span>
-            : <span><span style={{ color : "##ffffffb3" }}>Already registered?</span> Sign In Now.</span>}
+            ? <span><span style={{color : "#b6b5b4"}}> New to Netflix?</span> Sign Up.</span>
+            : <span><span style={{color : "#b6b5b4"}}>Already registered?</span> Sign In Now.</span>}
         </p>
-        <p className="text-gray-400 text-[13px] pb-28">
+        <p className="text-[13px] pb-28" style={{color : "#b6b5b4"}}>
           This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}
           <span className="text-blue-600">Learn more.</span>
         </p>

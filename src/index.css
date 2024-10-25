@@ -60,4 +60,17 @@ a {
   background-color: gray; 
 }
 
+.custom-text-color {
+  color: #b6b5b4;
+}
+
+.custom-input::placeholder{
+  color: #b7b8b8;
+  borderColor : #5e5e5e;
+}
+
+.custom-input{
+  border-color : #5e5e5e;
+}
+
 
