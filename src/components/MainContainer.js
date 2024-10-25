@@ -12,7 +12,7 @@ const MainContainer = () => {
   
   return (
     <div className="relative bg-slate-300">
-      <VideoTitle original_title={original_title} overview={overview} />
+      <VideoTitle original_title={original_title} overview={overview} id={id}/>
       <VideoBackground movieId={id} />
     </div>
   );
