@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { LOGIN_BG_IMAGE } from "../utils/constants";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -82,8 +83,8 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="absolute">
-        <div className="absolute inset-0 bg-gradient-to-b from-black to-black opacity-50" />
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-black to-black opacity-50"></div>
         <img
           className="w-screen h-[90vh] object-cover"
           src={LOGIN_BG_IMAGE}
@@ -92,7 +93,7 @@ const Login = () => {
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute py-10 px-16 bg-black w-[26%] flex flex-col my-24 mx-auto right-0 left-0 text-white bg-opacity-75"
+        className="absolute py-10 px-16 bg-black w-[26%] flex flex-col top-20 left-1/2 transform -translate-x-1/2 text-white bg-opacity-75"
       >
         <h1 className="font-bold text-3xl py-3 mb-3">
           {isSignInForm ? "Sign In" : "Sign Up"}
@@ -140,14 +141,15 @@ const Login = () => {
         </div>
         <p className="py-4 cursor-pointer -mt-1 mb-2" onClick={toggleSignInForm}>
           {isSignInForm
-            ? <span><span style={{color : "#b6b5b4"}}> New to Netflix?</span> Sign Up.</span>
-            : <span><span style={{color : "#b6b5b4"}}>Already registered?</span> Sign In Now.</span>}
+            ? <span><span className="custom-text-color"> New to Netflix?</span> Sign Up.</span>
+            : <span><span className="custom-text-color">Already registered?</span> Sign In Now.</span>}
         </p>
-        <p className="text-[13px] pb-28" style={{color : "#b6b5b4"}}>
+        <p className="text-[13px] pb-28 custom-text-color">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}
           <span className="text-blue-600">Learn more.</span>
         </p>
       </form>
+      <Footer />
     </>
   );
 };
