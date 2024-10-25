@@ -6,6 +6,7 @@ import { fetchMoviePosterAndLogo } from "../utils/fetchMoviePosterAndLogo";
 
 const useGetTopRatedMovies = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
   const getTopRatedMovies = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/top_rated?&page=1",
@@ -18,9 +19,8 @@ const useGetTopRatedMovies = () => {
     });
   };
 
-  useEffect(() => {
     getTopRatedMovies();
-  }, []);
+  }, [dispatch]);
 };
 
 export default useGetTopRatedMovies;

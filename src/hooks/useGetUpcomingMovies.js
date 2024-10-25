@@ -6,6 +6,7 @@ import { fetchMoviePosterAndLogo } from "../utils/fetchMoviePosterAndLogo";
 
 const useGetUpcomingMovies = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
   const getUpcomingMovies = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/upcoming?&page=1",
@@ -18,9 +19,8 @@ const useGetUpcomingMovies = () => {
     });
   };
 
-  useEffect(() => {
     getUpcomingMovies();
-  }, []);
+  }, [dispatch]);
 };
 
 export default useGetUpcomingMovies;
