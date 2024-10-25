@@ -27,7 +27,10 @@ const movieSlice = createSlice({
             state.upcomingMovies = action.payload;
         },
         addMetaData : (state, action) => {
-            state.metaData.push(action.payload);
+            const exist = state.metaData.some((data) => data.id === action.payload.id);
+            if(!exist){
+                state.metaData.push(action.payload);
+            }
         }
     }
 })

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addUpcomingMovies } from "../utils/movieSlice";
+import { fetchMoviePosterAndLogo } from "../utils/fetchMoviePosterAndLogo";
 
 const useGetUpcomingMovies = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,9 @@ const useGetUpcomingMovies = () => {
     );
     const json = await data.json();
     dispatch(addUpcomingMovies(json.results));
+    json.results.forEach((movie) => {
+      fetchMoviePosterAndLogo(movie.id, dispatch);
+    });
   };
 
   useEffect(() => {
