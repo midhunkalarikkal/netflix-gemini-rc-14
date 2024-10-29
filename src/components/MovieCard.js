@@ -10,6 +10,8 @@ const MovieCard = ({ movieId }) => {
     store.movies?.metaData.find((movie) => movie.id === movieId)
   );
 
+  // const movieTailer = useSelector((store) => sotre.movies?.trailerVideo)
+
   const isCardHover = () => {
     dispatch(changeHover({ value: true, movieId }));
   };
