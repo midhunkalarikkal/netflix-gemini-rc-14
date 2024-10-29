@@ -8,7 +8,9 @@ const movieSlice = createSlice({
         popularMovies : null,
         topRatedMovies : null,
         upcomingMovies : null,
-        metaData : []
+        metaData : [],
+        hover : {},
+        coordinates : {}
     },
     reducers : {
         addNowPlayingMovies : (state, action) => {
@@ -31,8 +33,14 @@ const movieSlice = createSlice({
             if(!exist){
                 state.metaData.push(action.payload);
             }
+        },
+        changeHover : (state, action)=>{
+            state.hover = action.payload;
+        },
+        changeCoordinates : (state, action)=>{
+            state.coordinates = action.payload;
         }
     }
 })
-export const { addNowPlayingMovies , addTrailerVideo , addPopularMovies , addTopRatedMovies , addUpcomingMovies , addMetaData} = movieSlice.actions;
+export const { addNowPlayingMovies , addTrailerVideo , addPopularMovies , addTopRatedMovies , addUpcomingMovies , addMetaData , changeHover , changeCoordinates} = movieSlice.actions;
 export default movieSlice.reducer;
