@@ -20,7 +20,7 @@ const MovieCard = ({ movieId }) => {
   const trailerData = useSelector((store) => store.movies?.trailerVideo.find((trailer) => trailer.movieId === movieId));
   
   return (
-    <div className="w-72 overflow-x" onMouseEnter={handleHover} onMouseLeave={onMouseLeave}>
+    <div className="w-72 overflow-x bg-black" onMouseEnter={handleHover} onMouseLeave={onMouseLeave}>
        {hovered ? (
         <iframe
           className="w-full aspect-video"
