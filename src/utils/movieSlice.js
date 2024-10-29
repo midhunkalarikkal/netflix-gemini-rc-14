@@ -15,7 +15,7 @@ const movieSlice = createSlice({
             state.nowPlayingMovies = action.payload;
         },
         addTrailerVideo : (state, action) => {
-            const exist = state.trailerVideo.some((data) => data.id === action.payload.movieId);
+            const exist = state.trailerVideo.some((data) => data.movieId === action.payload.movieId);
             if(!exist){
                 state.trailerVideo.push(action.payload);
             }

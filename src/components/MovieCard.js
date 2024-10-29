@@ -3,6 +3,7 @@ import { IMG_CDN } from "../utils/constants";
 import React, { useState } from "react";
 
 const MovieCard = ({ movieId }) => {
+  console.log("i")
   const [hovered , setHovered] = useState(false)
 
   const handleHover = () => {
