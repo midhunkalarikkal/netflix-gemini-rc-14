@@ -144,7 +144,7 @@ const Login = () => {
             ? <span><span className="custom-text-color"> New to Netflix?</span> Sign Up.</span>
             : <span><span className="custom-text-color">Already registered?</span> Sign In Now.</span>}
         </p>
-        <p className="text-[13px] pb-28 custom-text-color">
+        <p className={`text-[13px] custom-text-color ${isSignInForm ? "pb-28" : "pb-2"}`}>
           This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}
           <span className="text-blue-600">Learn more.</span>
         </p>
