@@ -1,7 +1,7 @@
 import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "./movieSlice";
 
-export const fetchMovieTrailer = async (movieId , dispatch) => {
+export const fetchMovieTrailer = async (movieId ,list,dispatch) => {
     try{
         const data = await fetch(
             "https://api.themoviedb.org/3/movie/" +
@@ -15,7 +15,8 @@ export const fetchMovieTrailer = async (movieId , dispatch) => {
         const trailer = filterData.length !== 0 ? filterData[0] : json.results[0];
         const tailerData = {
             trailer : trailer,
-            movieId : movieId
+            movieId : movieId,
+            list : list
         }
         dispatch(addTrailerVideo(tailerData));
 

@@ -1,43 +1,63 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IMG_CDN } from "../utils/constants";
 import React, { useState } from "react";
+import { addSelectedMovie } from "../utils/movieSlice";
 
-const MovieCard = ({ movieId }) => {
-  console.log("i")
+const MovieCard = React.memo(({ movieId , title}) => {
+  const dispatch = useDispatch()
+
   const [hovered , setHovered] = useState(false)
 
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
+  let movieToSelect = {};
+
   const handleHover = () => {
-    setHovered(true)
-  }
+    const timeoutId = setTimeout(() => {
+      setHovered(true);
+    }, 1000);
+    setHoverTimeout(timeoutId);
+  };
 
   const onMouseLeave = () => {
-    setHovered(false)
-  }
+    setHovered(false);
+    clearTimeout(hoverTimeout);
+  };
 
+  
   const metaData = useSelector((store) =>
     store.movies?.metaData.find((movie) => movie.id === movieId)
-  );
+);
 
-  const trailerData = useSelector((store) => store.movies?.trailerVideo.find((trailer) => trailer.movieId === movieId));
+const trailerData = useSelector((store) => store.movies?.trailerVideo.find((trailer) => trailer.movieId === movieId));
+if(trailerData){
+   movieToSelect = {
+    ...trailerData,
+    title: title || "Untitled Movie"
+  };
+}
+  const onClickHandle = () => {
+  dispatch(addSelectedMovie(movieToSelect))
+}
   
   return (
-    <div className="w-72 overflow-x bg-black" onMouseEnter={handleHover} onMouseLeave={onMouseLeave}>
+    <div className="w-72 overflow-x bg-black relative" onMouseEnter={handleHover} onMouseLeave={onMouseLeave} onClick={onClickHandle}>
        {hovered ? (
-        <iframe
-          className="w-full aspect-video"
-          src={`https://www.youtube.com/embed/${trailerData?.trailer?.key}?autoplay=1&controls=0&mute=0`}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        ></iframe>
-      ) : (
-        <img
+         <iframe
+         className="w-full aspect-video"
+         src={`https://www.youtube.com/embed/${trailerData?.trailer?.key}?autoplay=1&controls=0&mute=0`}
+         title="YouTube video player"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+         ></iframe>
+        ) : (
+          <img
           src={IMG_CDN + metaData?.poster}
           alt="movie_poster"
           className="w-full"
-        />
-      )}
+          />
+        )}
     </div>
   );
-};
+});
 
 export default MovieCard;

@@ -7,6 +7,8 @@ import { fetchMovieTrailer } from "../utils/fetchMovieTrailers";
 
 const useGetPopularMovies = () => {
   const dispatch = useDispatch();
+  let list = "popularMovies";
+
 
   useEffect(() => {
     const getPopularMovies = async () => {
@@ -18,7 +20,7 @@ const useGetPopularMovies = () => {
       dispatch(addPopularMovies(json.results));
       json.results.forEach((movie) => {
         fetchMoviePosterAndLogo(movie.id, dispatch);
-        fetchMovieTrailer(movie.id, dispatch);
+        fetchMovieTrailer(movie.id,list, dispatch);
       });
     };
 

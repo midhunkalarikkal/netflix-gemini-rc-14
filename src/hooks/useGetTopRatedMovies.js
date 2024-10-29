@@ -7,6 +7,8 @@ import { fetchMovieTrailer } from "../utils/fetchMovieTrailers";
 
 const useGetTopRatedMovies = () => {
   const dispatch = useDispatch();
+  let list = "topRatedMovies";
+
   useEffect(() => {
     const getTopRatedMovies = async () => {
       const data = await fetch(
@@ -17,7 +19,7 @@ const useGetTopRatedMovies = () => {
       dispatch(addTopRatedMovies(json.results));
       json.results.forEach((movie) => {
         fetchMoviePosterAndLogo(movie.id, dispatch);
-        fetchMovieTrailer(movie.id, dispatch);
+        fetchMovieTrailer(movie.id,list, dispatch);
       });
     };
 

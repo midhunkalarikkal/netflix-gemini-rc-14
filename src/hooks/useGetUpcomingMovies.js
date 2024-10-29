@@ -7,6 +7,8 @@ import { fetchMovieTrailer } from "../utils/fetchMovieTrailers";
 
 const useGetUpcomingMovies = () => {
   const dispatch = useDispatch();
+  let list = "upcomingMovies";
+
   useEffect(() => {
     const getUpcomingMovies = async () => {
       const data = await fetch(
@@ -17,7 +19,7 @@ const useGetUpcomingMovies = () => {
       dispatch(addUpcomingMovies(json.results));
       json.results.forEach((movie) => {
         fetchMoviePosterAndLogo(movie.id, dispatch);
-        fetchMovieTrailer(movie.id, dispatch);
+        fetchMovieTrailer(movie.id,list, dispatch);
       });
     };
 

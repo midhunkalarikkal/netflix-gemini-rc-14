@@ -1,23 +1,63 @@
+import CardExpand from "./CardExpand";
 import MovieList from "./MovieList";
 import { useSelector } from "react-redux";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
+  const trailerData = useSelector((store) => store.movies?.selectedMovie);
+  const {movieId , trailer:{key} = {}, list} = trailerData ? trailerData : {};
+
+  // return (
+  //   <div className="-mt-40 pl-4 relative">
+  //     {movies.nowPlayingMovies && (
+  //       <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
+  //     )
+  //   }
+  //   {
+  //     trailerData?.title === "Now Playing" ?
+  //     <CardExpand movieId={movieId} trailer={key}/>
+  //     : <></>
+  //   }
+  //     {movies.popularMovies && (
+  //       <MovieList title={"Popular Movies"} movies={movies.popularMovies} />
+  //     )}
+  //     {
+  //     trailerData?.title === "Popular Movies" ?
+  //     <CardExpand movieId={movieId} trailer={key}/>
+  //     : <></>
+  //   }
+  //     {movies.topRatedMovies && (
+  //       <MovieList title={"Top Rated Movies"} movies={movies.topRatedMovies} />
+  //     )}
+  //     {
+  //     trailerData?.title === "Top Rated Movies" ?
+  //     <CardExpand movieId={movieId} trailer={key}/>
+  //     : <></>
+  //   }
+  //     {movies.upcomingMovies && (
+  //       <MovieList title={"Upcoming Movies"} movies={movies.upcomingMovies} />
+  //     )}
+  //     {
+  //     trailerData?.title === "Upcoming Movies" ?
+  //     <CardExpand movieId={movieId} trailer={key}/>
+  //     : <></>
+  //   }
+  //   </div>
+  // );
+
+  const renderMovieSection = (title, movieList) => (
+    <>
+      {movieList && <MovieList title={title} movies={movieList}/>}
+      {trailerData?.title === title && <CardExpand movieId={movieId} trailer={key} list={list}/>}
+    </>
+  );
 
   return (
     <div className="-mt-40 pl-4 relative">
-      {movies.nowPlayingMovies && (
-        <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
-      )}
-      {movies.popularMovies && (
-        <MovieList title={"Popular Movies"} movies={movies.popularMovies} />
-      )}
-      {movies.topRatedMovies && (
-        <MovieList title={"Top Rated Movies"} movies={movies.topRatedMovies} />
-      )}
-      {movies.upcomingMovies && (
-        <MovieList title={"Upcoming Movies"} movies={movies.upcomingMovies} />
-      )}
+      {renderMovieSection("Now Playing", movies.nowPlayingMovies)}
+      {renderMovieSection("Popular Movies", movies.popularMovies)}
+      {renderMovieSection("Top Rated Movies", movies.topRatedMovies)}
+      {renderMovieSection("Upcoming Movies", movies.upcomingMovies)}
     </div>
   );
 };

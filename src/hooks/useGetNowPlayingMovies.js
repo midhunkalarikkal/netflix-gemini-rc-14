@@ -7,6 +7,7 @@ import { fetchMovieTrailer } from "../utils/fetchMovieTrailers";
 
 const useGetNowPlayingMovies = async () => {
   const dispatch = useDispatch();
+  let list = "nowPlayingMovies";
 
   useEffect(() => {
     const getNowPlayingMovies = async () => {
@@ -20,7 +21,7 @@ const useGetNowPlayingMovies = async () => {
 
       json.results.forEach((movie) => {
         fetchMoviePosterAndLogo(movie.id, dispatch);
-        fetchMovieTrailer(movie.id, dispatch);
+        fetchMovieTrailer(movie.id,list, dispatch);
       });
     };
 
