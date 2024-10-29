@@ -1,9 +1,7 @@
 import { useSelector } from "react-redux";
-import useGetMovieTrailer from "../hooks/useGetMovieTrailer";
 
 const VideoBackground = ({ movieId }) => {
   const trailerData = useSelector((store) => store.movies?.trailerVideo.find((trailer) => trailer.movieId === movieId));
-  useGetMovieTrailer(movieId);
 
   return (
     <div className="w-full">

@@ -9,14 +9,16 @@ const movieSlice = createSlice({
         topRatedMovies : null,
         upcomingMovies : null,
         metaData : [],
-        hover : {},
     },
     reducers : {
         addNowPlayingMovies : (state, action) => {
             state.nowPlayingMovies = action.payload;
         },
         addTrailerVideo : (state, action) => {
-            state.trailerVideo.push(action.payload);
+            const exist = state.trailerVideo.some((data) => data.id === action.payload.movieId);
+            if(!exist){
+                state.trailerVideo.push(action.payload);
+            }
         },
         addPopularMovies : (state, action) => {
             state.popularMovies = action.payload;
@@ -33,10 +35,7 @@ const movieSlice = createSlice({
                 state.metaData.push(action.payload);
             }
         },
-        changeHover : (state, action)=>{
-            state.hover = action.payload;
-        },
     }
 })
-export const { addNowPlayingMovies , addTrailerVideo , addPopularMovies , addTopRatedMovies , addUpcomingMovies , addMetaData , changeHover , changeCoordinates} = movieSlice.actions;
+export const { addNowPlayingMovies , addTrailerVideo , addPopularMovies , addTopRatedMovies , addUpcomingMovies , addMetaData} = movieSlice.actions;
 export default movieSlice.reducer;

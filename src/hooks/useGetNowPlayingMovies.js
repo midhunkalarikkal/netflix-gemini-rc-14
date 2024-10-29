@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addNowPlayingMovies } from "../utils/movieSlice";
 import { fetchMoviePosterAndLogo } from "../utils/fetchMoviePosterAndLogo";
+import { fetchMovieTrailer } from "../utils/fetchMovieTrailers";
 
 const useGetNowPlayingMovies = async () => {
   const dispatch = useDispatch();
@@ -19,11 +20,12 @@ const useGetNowPlayingMovies = async () => {
 
       json.results.forEach((movie) => {
         fetchMoviePosterAndLogo(movie.id, dispatch);
+        fetchMovieTrailer(movie.id, dispatch);
       });
     };
 
     getNowPlayingMovies();
-  }, [dispatch]);
+  }, []);
 };
 
 export default useGetNowPlayingMovies;
