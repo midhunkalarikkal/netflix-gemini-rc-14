@@ -3,7 +3,7 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import React, { useRef, useState } from "react";
-import { checkValidateData } from "../utils/validations";
+import { validateUserData , getFirebaseErrorMessage } from "../utils/validations";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -17,6 +17,7 @@ const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
 
   const [errMessage, setErrMessage] = useState(null);
+
   const dispatch = useDispatch();
 
   const name = useRef(null);
@@ -25,16 +26,22 @@ const Login = () => {
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+    setErrMessage(null)
   };
 
-  const handleSubmitButton = (e) => {
-    const message = checkValidateData(
-      email.current.value,
-      password.current.value
-    );
+  const handleSubmitButton = () => {
+    const data = {
+      email: email.current.value,
+      password: password.current.value,
+      name: isSignInForm ? null : name.current.value.trim(),
+      isSignInForm,
+    };
 
-    setErrMessage(message);
-    if (message) return;
+    const errors = validateUserData(data);
+    if (errors) {
+      setErrMessage(Object.values(errors).join(" "));
+      return;
+    }
 
     if (!isSignInForm) {
       createUserWithEmailAndPassword(
@@ -55,13 +62,12 @@ const Login = () => {
               );
             })
             .catch((error) => {
+              console.log("error : ",error)
               setErrMessage(error.message);
             });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrMessage(errorCode + "-" + errorMessage);
+          setErrMessage(getFirebaseErrorMessage(error.code));
         });
     } else {
       signInWithEmailAndPassword(
@@ -73,9 +79,8 @@ const Login = () => {
           const user = userCredential.user;
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrMessage(errorCode + " - " + errorMessage);
+          console.log(error)
+          setErrMessage(getFirebaseErrorMessage(error.code));
         });
     }
   };
@@ -114,7 +119,7 @@ const Login = () => {
         />
         <input
           ref={password}
-          type="password"
+          type="text"
           placeholder="Password"
           className="p-4 my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
         />
