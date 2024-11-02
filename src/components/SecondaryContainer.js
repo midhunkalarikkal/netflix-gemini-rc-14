@@ -15,7 +15,7 @@ const SecondaryContainer = () => {
   );
 
   return (
-    <div className="-mt-40 pl-4 relative">
+    <div className="-mt-6 md:-mt-16 lg:-mt-40 pl-1 md:pl-2 lg:pl-4 relative">
       {renderMovieSection("Now Playing", movies.nowPlayingMovies)}
       {renderMovieSection("Popular Movies", movies.popularMovies)}
       {renderMovieSection("Top Rated Movies", movies.topRatedMovies)}

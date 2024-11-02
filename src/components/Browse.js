@@ -14,11 +14,11 @@ const Browse = () => {
   useGetUpcomingMovies();
 
   return (
-    <div className="bg-white">
+    <div>
       <Header />
       <MainContainer />
-      {/* <SecondaryContainer />
-      <Footer /> */}
+      <SecondaryContainer />
+      {/* <Footer /> */}
     </div>
   );
 };

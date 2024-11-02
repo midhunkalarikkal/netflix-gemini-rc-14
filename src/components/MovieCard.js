@@ -41,7 +41,7 @@ if(trailerData){
 }
   
   return (
-    <div className="w-72 overflow-x bg-black relative" onMouseEnter={handleHover} onMouseLeave={onMouseLeave} onClick={onClickHandle}>
+    <div className="w-36 md:w-48 lg:w-72 overflow-x bg-black relative" onMouseEnter={handleHover} onMouseLeave={onMouseLeave} onClick={onClickHandle}>
        {hovered ? (
          <iframe
          className="w-full aspect-video"

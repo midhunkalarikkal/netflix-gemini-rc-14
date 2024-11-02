@@ -4,8 +4,8 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <>
-      <div className="pl-6 py-2 relative">
-        <h3 className="text-white font-bold text-3xl py-4">{title}</h3>
+      <div className="pl-3 md:pl-6 py-2 relative">
+        <h3 className="text-white font-bold text-xl md:text-2xl lg:text-3xl py-4">{title}</h3>
         <div className="relative">
           <div className="flex overflow-x-scroll no-scrollbar">
             <div className="flex space-x-3">
