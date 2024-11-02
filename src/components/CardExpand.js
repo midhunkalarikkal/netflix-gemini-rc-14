@@ -13,8 +13,8 @@ const CardExpand = ({ movieId, list, trailer }) => {
   }
 
   return (
-    <div className="w-[100%] p-2 flex bg-black h-80 justify-center space-x-10">
-      <div className="p-2 w-4/12 flex justify-center">
+    <div className="w-[100%] p-2 md:flex bg-black h-auto md:h-80 justify-center md:space-x-10">
+      <div className="p-2 md:w-5/12 lg:w-4/12 flex justify-center">
         <iframe
           className="w-full aspect-video"
           src={`https://www.youtube.com/embed/${
@@ -24,20 +24,20 @@ const CardExpand = ({ movieId, list, trailer }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         ></iframe>
       </div>
-      <div className="p-6 m-2 w-4/12 relative bg-white bg-opacity-10  rounded-lg shadow-md text-white">
-        <h2 className="text-2xl font-bold mb-2">
+      <div className="p-6 md:m-2 md:w-5/12 lg:w-4/12 relative bg-white bg-opacity-10 rounded-lg shadow-md text-white">
+        <h2 className="text-xl md:text-2xl font-bold mb-2">
           {movie?.original_title || "Untitled"}
         </h2>
-        <p className="text-sm mb-4">
+        <p className="text-xs md:text-sm mb-4">
           {movie?.overview || "No description available."}
         </p>
 
         <div className="flex items-center justify-between mt-4">
-          <p className="text-lg font-medium">
+          <p className="text-md md:text-lg font-medium">
             <span className="font-semibold">Rating: </span>⭐{" "}
             {movie?.vote_average || "N/A"}
           </p>
-          <p className="text-lg font-medium">
+          <p className="text-md md:text-lg font-medium">
             <span className="font-semibold">Release Date: </span>
             {movie?.release_date || "N/A"}
           </p>
