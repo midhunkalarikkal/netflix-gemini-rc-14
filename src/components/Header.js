@@ -40,10 +40,10 @@ const Header = () => {
   }, [dispatch, navigate]);
 
   return (
-    <div className="absolute flex px-10 py-2 w-full z-50 h-18">
+    <div className="absolute flex px-6 md:px-10 py-2 w-full z-50 h-10 md:h-18">
       <div className="w-1/2">
         <img
-          className="w-24 md:w-28 lg:w-36 cursor-pointer ml-18 md:ml-16 lg:ml-36 py-4"
+          className="w-20 md:w-28 lg:w-36 cursor-pointer ml-18 md:ml-16 lg:ml-36"
           src={LOGO}
           alt="Netflix_logo"
         />
@@ -67,14 +67,15 @@ const Header = () => {
       )}
       {user && (
         <>
-          <div
-            className="flex ml-auto items-center justify-between w-auto space-x-4 p-5 md:hidden"
-            onClick={handleOpenMenu}
-          >
-            <img src="/more.png" alt="" />
+          <div className="flex w-1/2 md:hidden"  onClick={handleOpenMenu}>
+            <img
+              className="w-6 h-6 cursor-pointer ml-auto"
+              src="/more.png"
+              alt="hambergur"
+            />
           </div>
           {openMenu && (
-            <div className="md:hidden flex justify-center bg-black py-4 absolute top-16 right-10">
+            <div className="md:hidden flex justify-center bg-black py-2 md:py-4 absolute top-16 right-10">
               <ul className="text-white space-y-2 w-full px-4">
                 <li className="text-center border-b border-gray-500 py-2 font-medium">
                   Hi, <span className="font-semibold">Username</span>
