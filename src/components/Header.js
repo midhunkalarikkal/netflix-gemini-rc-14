@@ -39,7 +39,7 @@ const Header = () => {
     <div className="absolute flex px-10 py-2 w-full z-50 h-18">
       <div className="w-1/2">
         <img
-          className="w-36 cursor-pointer ml-36 py-4"
+          className="w-24  md:w-28 lg:w-36 cursor-pointer ml-10 md:ml-16 lg:ml-36 py-4"
           src={LOGO}
           alt="Netflix_logo"
         />
