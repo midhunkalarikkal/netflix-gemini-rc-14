@@ -13,10 +13,12 @@ const MovieCard = React.memo(({ movieId , title}) => {
   let movieToSelect = {};
 
   const handleHover = () => {
-    const timeoutId = setTimeout(() => {
-      setHovered(true);
-    }, 1000);
-    setHoverTimeout(timeoutId);
+    if(window.innerWidth >= 768){
+      const timeoutId = setTimeout(() => {
+        setHovered(true);
+      }, 1000);
+      setHoverTimeout(timeoutId);
+    }
   };
 
   const onMouseLeave = () => {
@@ -24,7 +26,6 @@ const MovieCard = React.memo(({ movieId , title}) => {
     clearTimeout(hoverTimeout);
   };
 
-  
   const metaData = useSelector((store) =>
     store.movies?.metaData.find((movie) => movie.id === movieId)
 );
