@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 const VideoBackground = ({ movieId }) => {
   const trailerData = useSelector((store) => store.movies?.trailerVideo.find((trailer) => trailer.movieId === movieId));
-
   return (
     <div className="w-full">
       <iframe
