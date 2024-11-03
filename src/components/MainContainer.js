@@ -7,16 +7,20 @@ const MainContainer = () => {
 
   if (!movies || movies.length === 0) return;
 
-  const random = Math.floor(Math.random() * movies?.length)
+  const random = Math.floor(Math.random() * movies?.length);
 
-  const mainMovie = movies? movies[random] : "";
+  const mainMovie = movies ? movies[random] : "";
   const { original_title, overview, id } = mainMovie;
-  
+
   return (
-    <div className="relative">
-      <VideoTitle original_title={original_title} overview={overview} id={id}/>
-      <VideoBackground movieId={id} />
-    </div>
+      <div className="relative">
+        <VideoTitle
+          original_title={original_title}
+          overview={overview}
+          id={id}
+        />
+        <VideoBackground movieId={id} />
+      </div>
   );
 };
 

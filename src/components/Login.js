@@ -1,20 +1,14 @@
 import Header from "./Header";
+import Footer from "./Footer";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import React, { useRef, useState } from "react";
-import {
-  validateUserData,
-  getFirebaseErrorMessage,
-} from "../utils/validations";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
 import { LOGIN_BG_IMAGE } from "../utils/constants";
-import { Link } from "react-router-dom";
-import Footer from "./Footer";
+import { validateUserData, getFirebaseErrorMessage } from "../utils/validations";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -63,14 +57,16 @@ const Login = () => {
               dispatch(
                 addUser({ uid: uid, email: email, displayName: displayName })
               );
+              toast.success("Account created successfully! ");
             })
             .catch((error) => {
-              console.log("error : ", error);
               setErrMessage(error.message);
+              toast.error(error.message);
             });
-        })
-        .catch((error) => {
-          setErrMessage(getFirebaseErrorMessage(error.code));
+          })
+          .catch((error) => {
+            setErrMessage(getFirebaseErrorMessage(error.code));
+            toast.error("Sign up failed. Please try again.");
         });
     } else {
       signInWithEmailAndPassword(
@@ -80,10 +76,11 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
+          toast.success("Welcome "+user.displayName)
         })
         .catch((error) => {
-          console.log(error);
           setErrMessage(getFirebaseErrorMessage(error.code));
+          toast.error("Sign in failed. Please check your credentials.")
         });
     }
   };
@@ -91,7 +88,6 @@ const Login = () => {
   return (
     <>
       <Header />
-
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-b from-black to-black opacity-50"></div>
         <img

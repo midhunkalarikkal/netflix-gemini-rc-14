@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "./movieSlice";
 
@@ -21,7 +22,7 @@ export const fetchMovieTrailer = async (movieId ,list,dispatch) => {
         dispatch(addTrailerVideo(tailerData));
 
     }catch(error){
-
+        toast.error("Server error, please try again");
     }
   };
 

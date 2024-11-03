@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { API_OPTIONS } from "./constants";
 import { addMetaData } from "./movieSlice";
 
@@ -28,6 +29,6 @@ export const fetchMoviePosterAndLogo = async (movieId, dispatch) => {
     dispatch(addMetaData(movieMetaData));
 
   } catch (error) {
-    console.log("err : ", error);
+    toast.error("Server error, please try again");
   }
 };
