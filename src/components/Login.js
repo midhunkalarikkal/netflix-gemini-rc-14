@@ -7,19 +7,31 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import React, { useRef, useState } from "react";
 import { LOGIN_BG_IMAGE } from "../utils/constants";
-import { validateUserData, getFirebaseErrorMessage } from "../utils/validations";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import {
+  validateUserData,
+  getFirebaseErrorMessage,
+} from "../utils/validations";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
-
   const [errMessage, setErrMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
-
+  
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -63,10 +75,10 @@ const Login = () => {
               setErrMessage(error.message);
               toast.error(error.message);
             });
-          })
-          .catch((error) => {
-            setErrMessage(getFirebaseErrorMessage(error.code));
-            toast.error("Sign up failed. Please try again.");
+        })
+        .catch((error) => {
+          setErrMessage(getFirebaseErrorMessage(error.code));
+          toast.error("Sign up failed. Please try again.");
         });
     } else {
       signInWithEmailAndPassword(
@@ -76,11 +88,11 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          toast.success("Welcome "+user.displayName)
+          toast.success("Welcome " + user.displayName);
         })
         .catch((error) => {
           setErrMessage(getFirebaseErrorMessage(error.code));
-          toast.error("Sign in failed. Please check your credentials.")
+          toast.error("Sign in failed. Please check your credentials.");
         });
     }
   };
@@ -118,29 +130,42 @@ const Login = () => {
           placeholder="Email or mobile number"
           className="p-2 my-1 md:p-4 md:my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
         />
-        <input
-          ref={password}
-          type="text"
-          placeholder="Password"
-          className="p-2 my-1 md:p-4 md:my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
-        />
-        <p className="py-2 font-semibold text-xs md:text-md text-red-600">
+        <div className="relative w-full">
+          <input
+            ref={password}
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className="p-2 my-1 md:p-4 md:my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
+          />
+          <span
+            onClick={togglePasswordVisibility}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-300 opacity-75"
+          >
+            <VisibilityIcon />
+          </span>
+        </div>
+        {errMessage && 
+        <p className="py-2 my-1 font-semibold text-xs md:text-md text-red-600">
           {errMessage}
         </p>
+        }
         <button
-          className="px-4 py-1 md:py-2 -mt-2 w-full font-semibold rounded-[4px]"
+          className="px-4 py-1 mt-2 md:py-2 -mt-2 w-full font-semibold rounded-[4px]"
           style={{ backgroundColor: "#E50914" }}
           onClick={handleSubmitButton}
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <span className="px-2 text-gray-400 opacity-80 text-center text-sm md:text-lg py-1 md:py-2">
+        <span className="px-2 text-gray-300 opacity-80 text-center text-sm md:text-md py-1 md:py-2">
           OR
         </span>
-        <button className="px-4 py-1 md:py-2 my-1 md:my-2 w-full font-semibold rounded-[4px] bg-white bg-opacity-25 hover:bg-opacity-20 transition duration-200 ease-in-out transform">
+        <button className="px-4 py-1 md:py-2 my-1 w-full font-semibold rounded-[4px] bg-white bg-opacity-25 hover:bg-opacity-20 transition duration-200 ease-in-out transform">
           Use a sign-in code
         </button>
-        <Link to="/" className="my-2 text-sm md:text-md text-center text-white">
+        <Link
+          to="/"
+          className="my-2 text-sm md:text-md text-center text-white hover:text-[#b6b5b4] hover:underline"
+        >
           Forgot password?
         </Link>
         <div className="flex items-center text-sm md:text-md mt-2">

@@ -20,8 +20,8 @@ export const getFirebaseErrorMessage = (errorCode) => {
   const errorMessages = {
     "auth/email-already-in-use": "The email address is already registered.",
     "auth/invalid-email": "The email address is not valid.",
-    "auth/weak-password": "The password is too weak. Use at least 8 characters, including letters, numbers, and symbols.",
     "auth/user-not-found": "No user found with this email. Please sign up first.",
+    "auth/weak-password": "The password is too weak. Use at least 8 characters, including letters, numbers, and symbols.",
     "auth/wrong-password": "The password is incorrect. Please try again.",
     "auth/network-request-failed": "Network error. Please check your internet connection.",
     "auth/too-many-requests": "Too many login attempts. Please try again later.",
