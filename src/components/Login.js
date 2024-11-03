@@ -138,16 +138,16 @@ const Login = () => {
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <span className="px-2 text-white text-center text-sm md:text-lg py-1 md:py-2">
+        <span className="px-2 text-gray-400 opacity-80 text-center text-sm md:text-lg py-1 md:py-2">
           OR
         </span>
         <button className="px-4 py-1 md:py-2 my-1 md:my-2 w-full font-semibold rounded-[4px] bg-white bg-opacity-25 hover:bg-opacity-20 transition duration-200 ease-in-out transform">
           Use a sign-in code
         </button>
-        <Link to="/" className="my-2 text-sm md:text-lg text-center text-white">
+        <Link to="/" className="my-2 text-sm md:text-md text-center text-white">
           Forgot password?
         </Link>
-        <div className="flex items-center text-sm md:text-lg mt-2">
+        <div className="flex items-center text-sm md:text-md mt-2">
           <input
             className="h-4 w-4 cursor-pointer custom-checkbox rounded-[4px]"
             type="checkbox"
@@ -158,7 +158,7 @@ const Login = () => {
           </label>
         </div>
         <p
-          className="py-4 cursor-pointer text-sm md:text-lg -mt-1 mb-2"
+          className="py-4 cursor-pointer text-sm md:text-md -mt-1 mb-2"
           onClick={toggleSignInForm}
         >
           {isSignInForm ? (
