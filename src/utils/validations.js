@@ -1,21 +1,3 @@
-export const validateUserData = ({ email, password, name, isSignInForm }) => {
-  const errors = {};
-
-  const isEmailValid = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
-  const isPasswordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
-.test(password);
-
-  if (!isEmailValid) errors.email = "Email is not valid.";
-  if (!isPasswordValid) errors.password = "Password is not valid.";
-
-  if (!isSignInForm) {
-    const isNameValid = /^[a-zA-Z_]{5,20}$/.test(name);
-    if (!isNameValid) errors.name = "Name is not valid.";
-  }
-
-  return Object.keys(errors).length ? errors : null;
-};
-
 export const getFirebaseErrorMessage = (errorCode) => {
   const errorMessages = {
     "auth/email-already-in-use": "The email address is already registered.",
