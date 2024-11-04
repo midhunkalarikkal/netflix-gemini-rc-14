@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { addUser } from "../utils/userSlice";
+import { addUser, verifyUser } from "../utils/userSlice";
 import { LOGIN_BG_IMAGE } from "../utils/constants";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getFirebaseErrorMessage } from "../utils/validations";
@@ -14,8 +14,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -24,6 +26,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -54,53 +57,69 @@ const Login = () => {
       return;
     }
 
-    if(isForgotPasswordForm){
+    if (isForgotPasswordForm) {
       sendPasswordResetEmail(auth, data.email)
-      .then(() => {
-        console.log("Email sended");
-        toast.success("Email sended successfully!")
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        console.log("errorCode : ",errorCode);
-        const errorMessage = error.message;
-        console.log("errorMessage : ",errorMessage);
-        setErrMessage(getFirebaseErrorMessage(error.code));
-      });
+        .then(() => {
+          toast.success("Email sended successfully!");
+        })
+        .catch((error) => {
+          setErrMessage(getFirebaseErrorMessage(error.code));
+        });
     } else if (!isSignInForm) {
       createUserWithEmailAndPassword(auth, data.email, data.password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          updateProfile(user, {
-            displayName: data.name,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
-          })
+      .then((userCredential) => {
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: data.name,
+          photoURL: "https://example.com/jane-q-user/profile.jpg",
+        })
+        .then(() => {
+          sendEmailVerification(user)
             .then(() => {
-              const { uid, email, displayName } = auth.currentUser;
-              dispatch(
-                addUser({ uid: uid, email: email, displayName: displayName })
-              );
-              toast.success("Account created successfully! ");
+              toast.success("Verification email sent. Please check your email.");
+              const interval = setInterval(() => {
+                user.reload().then(() => {
+                  if (user.emailVerified) {
+                    clearInterval(interval);
+                    dispatch(
+                      addUser({
+                        uid: user.uid,
+                        email: user.email,
+                        displayName: user.displayName,
+                      })
+                    );
+                    toast.success("Email verified!");
+                    toast.success("Welcome "+user.displayName);
+                    navigate("/browse")
+                  }
+                });
+              }, 1000);
             })
             .catch((error) => {
               setErrMessage(error.message);
               toast.error(error.message);
             });
-        })
-        .catch((error) => {
-          setErrMessage(getFirebaseErrorMessage(error.code));
-          toast.error("Sign up failed. Please try again.");
         });
+      })
+      .catch((error) => {
+        setErrMessage(getFirebaseErrorMessage(error.code));
+        toast.error("Sign up failed. Please try again.");
+      });
     } else {
       signInWithEmailAndPassword(auth, data.email, data.password)
-        .then((userCredential) => {
-          const user = userCredential.user;
+      .then((userCredential) => {
+        const user = userCredential.user;
+        if (user.emailVerified) {
           toast.success("Welcome " + user.displayName);
-        })
-        .catch((error) => {
-          setErrMessage(getFirebaseErrorMessage(error.code));
-          toast.error("Sign in failed. Please check your credentials.");
-        });
+          navigate("/browse");
+        } else {
+          toast.error("Please verify your email before signing in.");
+        }
+      })
+      .catch((error) => {
+        setErrMessage(getFirebaseErrorMessage(error.code));
+        toast.error("Sign in failed. Please check your credentials.");
+      });
     }
   };
 
@@ -265,11 +284,9 @@ const Login = () => {
         </p>
 
         {isForgotPasswordForm && (
-            <p
-            className="text-xs md:text-[13px] custom-text-color pb-6"
-              >
-          You will get an email for updating your password
-        </p>
+          <p className="text-xs md:text-[13px] custom-text-color pb-6">
+            You will get an email for updating your password
+          </p>
         )}
 
         <p
@@ -281,7 +298,6 @@ const Login = () => {
           <span className="text-blue-600">Learn more.</span>
         </p>
       </form>
-
       <Footer />
     </>
   );
