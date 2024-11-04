@@ -21,7 +21,7 @@ export const fetchMovieTrailer = async (movieId ,list,dispatch) => {
         dispatch(addTrailerVideo(tailerData));
 
     }catch(error){
-        console.log("Server error, please try again");
+        console.log("tmdb fetch");
     }
   };
 
