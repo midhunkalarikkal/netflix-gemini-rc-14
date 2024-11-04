@@ -72,20 +72,16 @@ const Header = () => {
         {user && (
           <>
             <div className="flex w-1/2 md:hidden" onClick={handleOpenMenu}>
-              <img
-                className="w-6 h-6 cursor-pointer ml-auto"
-                src="/more.png"
-                alt="hambergur"
-              />
+              <img className="w-6 h-6 cursor-pointer ml-auto" width="50" height="50" src="https://img.icons8.com/ios-filled/50/e50914/menu--v1.png" alt="menu--v1"/>
             </div>
             {openMenu && (
-              <div className="md:hidden flex justify-center bg-black py-2 md:py-4 absolute top-16 right-10">
+              <div className="md:hidden flex justify-center bg-black py-2 md:py-4 absolute top-8 right-6 lg:top-16 lg:right-10">
                 <ul className="text-white space-y-2 w-full px-4">
-                  <li className="text-center border-b border-gray-500 py-2 font-medium">
+                  <li className="text-center border-b border-gray-500 py-2 font-medium text-xs sm:text-sm">
                     Hi, <span className="font-semibold">Username</span>
                   </li>
                   <li
-                    className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded"
+                    className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
                     onClick={handleSignOut}
                   >
                     Logout
