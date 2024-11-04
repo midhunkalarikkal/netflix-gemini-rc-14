@@ -10,8 +10,8 @@ import { addUser } from "../utils/userSlice";
 import { LOGIN_BG_IMAGE } from "../utils/constants";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {getFirebaseErrorMessage } from "../utils/validations";
-import {
-  createUserWithEmailAndPassword,
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
@@ -41,7 +41,8 @@ const Login = () => {
     setErrMessage(null);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data,e) => {
+    e.preventDefault();
     if (!isValid) {
       toast.error("Please fix the errors before submitting the form.");
       return;
@@ -105,7 +106,7 @@ const Login = () => {
       </div>
 
       <form
-        onSubmit={(e) => {e.preventDefault(); handleSubmit(onSubmit);}}
+        onSubmit={handleSubmit(onSubmit)}
         className="absolute py-10 px-14 md:px-16 bg-black w-[85%] sm:w-[70%] md:w-[430px] flex flex-col top-20 left-1/2 transform -translate-x-1/2 text-white bg-opacity-75"
       >
         <h1 className="font-bold text-2xl lg:text-3xl py-1 lg:py-3 mb-3">
@@ -165,7 +166,9 @@ const Login = () => {
             onClick={togglePasswordVisibility}
             className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-300 opacity-75"
           >
-            <VisibilityIcon />
+            {
+              showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />
+            }
           </span>
           {errors.password && (
           <p className="text-red-500 text-sm md:text-md">{errors.password.message}</p>

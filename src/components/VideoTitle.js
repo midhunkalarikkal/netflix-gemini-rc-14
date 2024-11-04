@@ -24,7 +24,7 @@ const VideoTitle = ({ original_title, overview, id }) => {
       <div className="absolute bottom-1 md:bottom-16 lg:bottom-36 left-2 md:left-6 lg:left-8 p-1 md:p-4 text-white">
         {movieMetaData?.logo ? (
           <img
-            className="w-32 md:w-48 lg:w-72"
+            className="w-24 md:w-48 lg:w-72"
             src={IMG_CDN + movieMetaData?.logo}
             alt="movie_title"
           />
