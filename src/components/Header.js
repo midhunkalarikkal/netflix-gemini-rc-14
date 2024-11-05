@@ -90,7 +90,7 @@ const Header = () => {
             <div className="md:hidden flex justify-center bg-black py-2 md:py-4 absolute top-8 right-6 lg:top-16 lg:right-10">
               <ul className="text-white space-y-2 w-full px-4">
                 <li className="text-center border-b border-gray-500 py-2 font-medium text-xs sm:text-sm">
-                  Hi, <span className="font-semibold">Username</span>
+                  Hi, <span className="font-semibold">{user.displayName}</span>
                 </li>
                 <li
                   className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
