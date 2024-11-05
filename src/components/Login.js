@@ -285,7 +285,7 @@ const Login = () => {
 
         {isForgotPasswordForm && (
           <p className="text-xs md:text-[13px] custom-text-color pb-6">
-            You will get an email for updating your password
+            If your email is registered, you will receive a password reset email shortly.
           </p>
         )}
 
