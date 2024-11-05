@@ -197,11 +197,29 @@ const Login = () => {
               className="p-2 my-1 md:p-4 md:my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
               {...register("password", {
                 required: "Password is required",
-                pattern: {
-                  value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
-                  message: "Enter a valid password.",
-                },
+                // pattern: {
+                //   value:
+                //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                //   message: "Enter a valid password.",
+                // },
+                validate: (value) => {
+                  if (value.length < 8) {
+                    return "Password must be at least 8 characters long.";
+                  }
+                  if (!/[A-Z]/.test(value)) {
+                    return "Password must include at least one uppercase letter.";
+                  }
+                  if (!/[a-z]/.test(value)) {
+                    return "Password must include at least one lowercase letter.";
+                  }
+                  if (!/\d/.test(value)) {
+                    return "Password must include at least one number.";
+                  }
+                  if (!/[!@#$%^&*]/.test(value)) {
+                    return "Password must include at least one special character (!@#$%^&*).";
+                  }
+                  return true;
+                }
               })}
             />
             <span
@@ -277,7 +295,7 @@ const Login = () => {
             </span>
           ) : (
             <span>
-              <span className="custom-text-color">Already registered?</span>{" "}
+              <span className="custom-text-color cursor-pointer">Already registered?</span>{" "}
               Sign In Now.
             </span>
           )}
