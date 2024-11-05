@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import toast from "react-hot-toast";
-import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -50,10 +49,6 @@ const Header = () => {
     setOpenMenu((prev) => !prev);
   };
 
-  const handleGptSearch = () => {
-    dispatch(toggleGptSearchView())
-  }
-
   return (
     <div className="absolute flex px-6 md:px-10 py-2 w-full z-50 h-10 md:h-18">
       <div className="w-1/2">
@@ -65,7 +60,6 @@ const Header = () => {
       </div>
       {user && (
         <div className="ml-auto items-center justify-between w-auto space-x-4 p-5 hidden md:flex">
-          <h4 className="font-semiBold text-white hover:underline cursor-pointer" onClick={handleGptSearch}>GPT Search</h4>
           <h4 className="font-semiBold text-white">Hi, {user.displayName}</h4>
           <img
             className="w-8 object-cover rounded-lg"

@@ -12,12 +12,12 @@ const MovieList = ({ title, movies }) => {
   }, [movies]);
 
   return (
-    <div className="pl-3 md:pl-6 py-2 relative">
+    <div className="pl-3 md:pl-6 py-1 md-py-2 relative">
       {listLoading ? (
         <MovieListShimmer />
       ) : (
         <>
-          <h3 className="text-white font-bold text-xl md:text-2xl lg:text-3xl py-4">
+          <h3 className="text-white font-bold text-lg md:text-2xl lg:text-3xl py-4">
             {title}
           </h3>
           <div className="relative">

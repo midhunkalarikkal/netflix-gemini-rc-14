@@ -28,6 +28,6 @@ export const fetchMoviePosterAndLogo = async (movieId, dispatch) => {
     dispatch(addMetaData(movieMetaData));
 
   } catch (error) {
-    console.log("tmdb fetch");
+    
   }
 };

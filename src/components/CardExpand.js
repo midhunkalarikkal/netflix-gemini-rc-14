@@ -25,7 +25,7 @@ const CardExpand = ({ movieId, list, trailer }) => {
         ></iframe>
       </div>
       <div className="p-6 md:m-2 md:w-5/12 lg:w-4/12 relative bg-white bg-opacity-10 rounded-lg shadow-md text-white">
-        <h2 className="text-xl md:text-2xl font-bold mb-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-2 w-[90%]">
           {movie?.original_title || "Untitled"}
         </h2>
         <p className="text-xs md:text-sm mb-4">
