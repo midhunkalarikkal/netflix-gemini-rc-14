@@ -197,11 +197,6 @@ const Login = () => {
               className="p-2 my-1 md:p-4 md:my-2 w-full bg-gray-400 text-white bg-opacity-10 border-[1px] rounded-[4px] focus:border-white focus:outline-none custom-input"
               {...register("password", {
                 required: "Password is required",
-                // pattern: {
-                //   value:
-                //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
-                //   message: "Enter a valid password.",
-                // },
                 validate: (value) => {
                   if (value.length < 8) {
                     return "Password must be at least 8 characters long.";

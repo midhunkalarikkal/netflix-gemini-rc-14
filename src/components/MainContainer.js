@@ -1,9 +1,18 @@
 import VideoTitle from "./VideoTitle";
 import { useSelector } from "react-redux";
 import VideoBackground from "./VideoBackground";
+import { useEffect, useState } from "react";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
+
+  const [listLoading, setListLoading] = useState(true);
+
+  useEffect(() => {
+    if (movies) {
+      setListLoading(false);
+    }
+  }, [movies]);
 
   if (!movies || movies.length === 0) return;
 

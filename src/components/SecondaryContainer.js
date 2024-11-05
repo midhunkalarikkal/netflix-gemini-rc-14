@@ -5,12 +5,18 @@ import { useSelector } from "react-redux";
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
   const trailerData = useSelector((store) => store.movies?.selectedMovie);
-  const {movieId , trailer:{key} = {}, list} = trailerData ? trailerData : {};
+  const {
+    movieId,
+    trailer: { key } = {},
+    list,
+  } = trailerData ? trailerData : {};
 
   const renderMovieSection = (title, movieList) => (
     <>
-      {movieList && <MovieList title={title} movies={movieList}/>}
-      {trailerData?.title === title && <CardExpand movieId={movieId} trailer={key} list={list}/>}
+      {movieList && <MovieList title={title} movies={movieList} />}
+      {trailerData?.title === title && (
+        <CardExpand movieId={movieId} trailer={key} list={list} />
+      )}
     </>
   );
 
