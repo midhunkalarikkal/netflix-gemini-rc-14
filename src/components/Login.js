@@ -71,7 +71,6 @@ const Login = () => {
         const user = userCredential.user;
         updateProfile(user, {
           displayName: data.name,
-          photoURL: "https://example.com/jane-q-user/profile.jpg",
         })
         .then(() => {
           sendEmailVerification(user)
