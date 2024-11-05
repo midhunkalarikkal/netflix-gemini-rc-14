@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { addUser, verifyUser } from "../utils/userSlice";
+import { addUser } from "../utils/userSlice";
 import { LOGIN_BG_IMAGE } from "../utils/constants";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getFirebaseErrorMessage } from "../utils/validations";
