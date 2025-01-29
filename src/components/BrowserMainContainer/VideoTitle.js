@@ -1,14 +1,16 @@
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { IMG_CDN } from "../../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
 import VideoTitleShimmer from "../Shimmer/VideoTitleShimmer";
+import { toggleMainContainerVideoTitleLoading } from "../../utils/loadingSlice";
 
 const VideoTitle = ({ original_title, overview, id }) => {
-  const [titleLoading, setTitleLoading] = useState(true);
 
+  const dispatch = useDispatch();
   const movieMetaData = useSelector((store) =>
     store.movies?.metaData.find((meta) => meta.id === id)
   );
+  const mainContainerVideoTitleLoading = useSelector((store) => store.loading?.mainContainerVideoTitleLoading);
   
   useEffect(() => {
     if (movieMetaData || original_title || overview || id) {
@@ -16,11 +18,11 @@ const VideoTitle = ({ original_title, overview, id }) => {
         dispatch(toggleMainContainerVideoTitleLoading(false));
       },2000);
     }
-  }, [movieMetaData]);
+  }, [movieMetaData, original_title, overview, id, dispatch]);
 
   return (
     <div className="absolute bg-gradient-to-r from-black w-screen aspect-video">
-       {titleLoading ? (
+       {mainContainerVideoTitleLoading ? (
         <VideoTitleShimmer /> 
       ) : (
       <div className="absolute bottom-1 md:bottom-16 lg:bottom-36 left-2 md:left-6 lg:left-8 p-1 md:p-4 text-white">

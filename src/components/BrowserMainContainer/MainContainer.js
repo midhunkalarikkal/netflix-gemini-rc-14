@@ -1,20 +1,11 @@
 import VideoTitle from "./VideoTitle";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import VideoBackground from "./VideoBackground";
-import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
 import VideoTitleShimmer from "../Shimmer/VideoTitleShimmer";
+import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
-
-  const [listLoading, setListLoading] = useState(true);
-
-  useEffect(() => {
-    if (movies) {
-      setListLoading(false);
-    }
-  }, [movies]);
 
   if (!movies || movies.length === 0) return;
 
@@ -25,7 +16,7 @@ const MainContainer = () => {
 
   return (
       <div className="relative">
-        {!mainMovie ? (
+        {!movies || !mainMovie ? (
           <>
           <div className="absolute bg-gradient-to-r from-black w-screen aspect-video">
             <VideoTitleShimmer />

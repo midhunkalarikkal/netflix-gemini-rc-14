@@ -1,22 +1,28 @@
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
+import { toggleMainContainerVideoBackgroundLoading } from "../../utils/loadingSlice";
 
 const VideoBackground = ({ movieId }) => {
+  const dispatch = useDispatch();
   const trailerData = useSelector((store) =>
     store.movies?.trailerVideo.find((trailer) => trailer.movieId === movieId)
   );
-  const [loading, setLoading] = useState(true);
+  const mainContainerVideoBackgroundLoading = useSelector(
+    (store) => store.loading?.mainContainerVideoBackgroundLoading
+  );
+
   useEffect(() => {
     if (trailerData?.trailer) {
       setTimeout(() => {
         dispatch(toggleMainContainerVideoBackgroundLoading(false));
-      },2000);
+      }, 2000);
     }
-  }, [trailerData]);
+  }, [trailerData, dispatch]);
+
   return (
     <>
-      {loading ? (
+      {mainContainerVideoBackgroundLoading ? (
         <VideoBackgroundShimmer />
       ) : (
         <div className="w-full">
