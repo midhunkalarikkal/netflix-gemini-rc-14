@@ -235,12 +235,12 @@ const Login = () => {
             >
               {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
             </span>
-            {errors.password && (
-              <p className="text-red-500 text-sm md:text-md">
-                {errors.password.message}
-              </p>
-            )}
           </div>
+        )}
+        {errors.password && (
+          <p className="text-red-500 text-sm md:text-md">
+            {errors.password.message}
+          </p>
         )}
 
         {errMessage && (
