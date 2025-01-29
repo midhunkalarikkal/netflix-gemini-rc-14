@@ -9,7 +9,9 @@ const VideoBackground = ({ movieId }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (trailerData?.trailer) {
-      setLoading(false);
+      setTimeout(() => {
+        dispatch(toggleMainContainerVideoBackgroundLoading(false));
+      },2000);
     }
   }, [trailerData]);
   return (

@@ -11,8 +11,10 @@ const VideoTitle = ({ original_title, overview, id }) => {
   );
   
   useEffect(() => {
-    if(movieMetaData){
-      setTitleLoading(false);
+    if (movieMetaData || original_title || overview || id) {
+      setTimeout(() => {
+        dispatch(toggleMainContainerVideoTitleLoading(false));
+      },2000);
     }
   }, [movieMetaData]);
 
