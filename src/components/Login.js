@@ -24,6 +24,7 @@ const Login = () => {
   const [isForgotPasswordForm, setIsForgotPasswordForm] = useState(false);
   const [errMessage, setErrMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    reset
   } = useForm({
     mode: "onChange",
   });
@@ -56,13 +58,16 @@ const Login = () => {
       toast.error("Please fix the errors before submitting the form.");
       return;
     }
-
+    setSubmitLoading(true);
     if (isForgotPasswordForm) {
       sendPasswordResetEmail(auth, data.email)
         .then(() => {
+          reset();
+          setSubmitLoading(false);
           toast.success("Email sended successfully!");
         })
         .catch((error) => {
+          setSubmitLoading(false);
           setErrMessage(getFirebaseErrorMessage(error.code));
         });
     } else if (!isSignInForm) {
@@ -75,7 +80,9 @@ const Login = () => {
         .then(() => {
           sendEmailVerification(user)
             .then(() => {
-              toast.success("Verification email sent. Please check your email.");
+              reset();
+              setSubmitLoading(false);
+              toast.success("Verification email sent. Please check your email.")
               const interval = setInterval(() => {
                 user.reload().then(() => {
                   if (user.emailVerified) {
@@ -95,12 +102,14 @@ const Login = () => {
               }, 1000);
             })
             .catch((error) => {
+              setSubmitLoading(false);
               setErrMessage(error.message);
               toast.error(error.message);
             });
         });
       })
       .catch((error) => {
+        setSubmitLoading(false);
         setErrMessage(getFirebaseErrorMessage(error.code));
         toast.error("Sign up failed. Please try again.");
       });
@@ -109,13 +118,17 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         if (user.emailVerified) {
+          reset();
+          setSubmitLoading(false);
           toast.success("Welcome " + user.displayName);
           navigate("/browse");
         } else {
+          setSubmitLoading(false);
           toast.error("Please verify your email before signing in.");
         }
       })
       .catch((error) => {
+        setSubmitLoading(false);
         setErrMessage(getFirebaseErrorMessage(error.code));
         toast.error("Sign in failed. Please check your credentials.");
       });
@@ -241,25 +254,27 @@ const Login = () => {
           className="px-4 py-1 mt-2 md:py-2 w-full font-semibold rounded-[4px]"
           style={{ backgroundColor: "#E50914" }}
         >
-          {isForgotPasswordForm
+          {submitLoading 
+          ? "Loading..." 
+          : isForgotPasswordForm
             ? "Submit email"
             : isSignInForm
             ? "Sign In"
             : "Sign Up"}
         </button>
 
-        {!isForgotPasswordForm && (
+        {!isForgotPasswordForm  && (
           <>
             <span className="px-2 text-gray-300 opacity-80 text-center text-sm md:text-md py-1 md:py-2">
               OR
             </span>
 
-            <button className="px-4 py-1 md:py-2 my-1 w-full font-semibold rounded-[4px] bg-white bg-opacity-25 hover:bg-opacity-20 transition duration-200 ease-in-out transform">
+            <button className="px-4 py-1 md:py-2 my-1 w-full font-semibold rounded-[4px] bg-white bg-opacity-25 hover:bg-opacity-20 transition duration-200 ease-in-out transform" disabled>
               Use a sign-in code
             </button>
 
             <p
-              className="my-2 text-sm md:text-md text-center text-white hover:text-[#b6b5b4] hover:underline"
+              className="my-2 text-sm md:text-md text-center text-white hover:text-[#b6b5b4] hover:underline cursor-pointer"
               onClick={toggleToForgotPassword}
             >
               Forgot password?
