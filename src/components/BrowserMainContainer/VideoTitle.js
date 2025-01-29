@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { IMG_CDN } from "../utils/constants";
 import { useEffect, useState } from "react";
-import VideoTitleShimmer from "./Shimmer/VideoTitleShimmer";
+import { IMG_CDN } from "../../utils/constants";
+import VideoTitleShimmer from "../Shimmer/VideoTitleShimmer";
 
 const VideoTitle = ({ original_title, overview, id }) => {
   const [titleLoading, setTitleLoading] = useState(true);

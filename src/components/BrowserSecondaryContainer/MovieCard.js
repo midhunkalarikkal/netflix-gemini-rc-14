@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { IMG_CDN } from "../utils/constants";
 import React, { useState } from "react";
-import { addSelectedMovie } from "../utils/movieSlice";
+import { IMG_CDN } from "../../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addSelectedMovie } from "../../utils/movieSlice";
 
 const MovieCard = React.memo(({ movieId, title }) => {
   const dispatch = useDispatch();

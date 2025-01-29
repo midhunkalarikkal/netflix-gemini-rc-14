@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import VideoBackgroundShimmer from "./Shimmer/VideoBackgroundShimmer";
 import { useEffect, useState } from "react";
+import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
 
 const VideoBackground = ({ movieId }) => {
   const trailerData = useSelector((store) =>

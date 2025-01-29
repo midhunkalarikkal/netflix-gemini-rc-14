@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addPopularMovies } from "../utils/movieSlice";
-import { fetchMoviePosterAndLogo } from "../utils/fetchMoviePosterAndLogo";
 import { fetchMovieTrailer } from "../utils/fetchMovieTrailers";
+import { fetchMoviePosterAndLogo } from "../utils/fetchMoviePosterAndLogo";
 
 const useGetPopularMovies = () => {
   const dispatch = useDispatch();

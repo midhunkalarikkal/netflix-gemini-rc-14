@@ -1,5 +1,5 @@
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 import toast from "react-hot-toast";
 import React, { useState } from "react";
 import { auth } from "../utils/firebase";

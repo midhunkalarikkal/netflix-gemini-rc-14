@@ -1,5 +1,5 @@
-import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "./movieSlice";
+import { API_OPTIONS } from "../utils/constants";
 
 export const fetchMovieTrailer = async (movieId ,list,dispatch) => {
     try{

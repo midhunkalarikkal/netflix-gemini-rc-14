@@ -1,11 +1,11 @@
-import Header from "./Header";
-import MainContainer from "./MainContainer";
-import SecondaryContainer from "./SecondaryContainer";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 import useGetPopularMovies from "../hooks/useGetPopularMovies";
 import useGetTopRatedMovies from "../hooks/useGetTopRatedMovies";
 import useGetUpcomingMovies from "../hooks/useGetUpcomingMovies";
+import MainContainer from "./BrowserMainContainer/MainContainer";
 import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
-import Footer from "./Footer";
+import SecondaryContainer from "./BrowserSecondaryContainer/SecondaryContainer";
 
 const Browse = () => {
   useGetNowPlayingMovies();

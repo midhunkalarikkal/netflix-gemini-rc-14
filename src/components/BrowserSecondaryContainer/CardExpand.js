@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addSelectedMovie } from "../utils/movieSlice";
+import { addSelectedMovie } from "../../utils/movieSlice";
 
 const CardExpand = ({ movieId, list, trailer }) => {
   const dispatch = useDispatch()

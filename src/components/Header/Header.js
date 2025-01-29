@@ -1,9 +1,9 @@
-import { auth } from "../utils/firebase";
+import { auth } from "../../utils/firebase";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LOGO, USER_LOGO } from "../utils/constants";
+import { LOGO, USER_LOGO } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../../utils/userSlice";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 

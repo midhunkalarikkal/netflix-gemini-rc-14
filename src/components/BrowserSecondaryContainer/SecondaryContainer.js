@@ -1,8 +1,8 @@
-import CardExpand from "./CardExpand";
 import MovieList from "./MovieList";
+import CardExpand from "./CardExpand";
 import { useSelector } from "react-redux";
-import MovieListShimmer from "./Shimmer/MovieListShimmer";
 import { useEffect, useState } from "react";
+import MovieListShimmer from "../Shimmer/MovieListShimmer";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
