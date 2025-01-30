@@ -37,6 +37,9 @@ const Footer = () => {
           <Link to="/" className="underline custom-text-color">
             Terms of Use
           </Link>
+          <Link to="/" className="text-balck opacity-0">
+            This is a personal project
+          </Link>
         </div>
         <div className="flex flex-col space-y-2">
           <Link to="/" className="underline custom-text-color">
