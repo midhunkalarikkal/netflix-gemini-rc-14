@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addSelectedMovie } from "../../utils/movieSlice";
+import { addSelectedForLarge, addSelectedMovie } from "../../utils/movieSlice";
+import { toggleFullScreen } from "../../utils/loadingSlice";
 
 const CardExpand = ({ movieId, list, trailer }) => {
   const dispatch = useDispatch()
@@ -9,14 +10,20 @@ const CardExpand = ({ movieId, list, trailer }) => {
   });
 
   const handleClose = () => {
-    dispatch(addSelectedMovie(null))
+    dispatch(addSelectedMovie(null));
+  }
+
+  const switchToLarge = () => {
+    dispatch(addSelectedForLarge(trailer))
+    dispatch(addSelectedMovie(null));
+    dispatch(toggleFullScreen(true));
   }
 
   return (
     <div className="w-[100%] p-2 md:flex bg-black h-auto md:h-80 justify-center md:space-x-10">
       <div className="p-2 md:w-5/12 lg:w-4/12 flex justify-center">
         <iframe
-          className="w-full aspect-video"
+          className="w-full aspect-video hover:border-2 border-red-600"
           src={`https://www.youtube.com/embed/${
             trailer || ""
           }?autoplay=1&controls=0&mute=0`}
@@ -48,6 +55,9 @@ const CardExpand = ({ movieId, list, trailer }) => {
         >
           ^
         </button>
+      <div className="py-2 hidden lg:block">
+        <button className="text-xs md:text-md px-1 md:px-2 py-1 rounded-md bg-white text-gray-500 hover:border-[1px] hover:border-red-600 hover:bg-black hover:text-white" onClick={switchToLarge}>Full screen</button>
+      </div>
       </div>
     </div>
   );

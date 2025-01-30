@@ -50,7 +50,7 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute flex px-6 md:px-10 py-2 w-full z-50 h-10 md:h-18">
+    <div className="absolute flex px-6 md:px-10 py-2 w-full z-50 h-10 md:h-18 ">
       <div className="w-1/2">
         <img
           className="w-20 md:w-28 lg:w-36 cursor-pointer ml-18 md:ml-16 lg:ml-36"

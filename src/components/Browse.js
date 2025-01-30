@@ -6,6 +6,8 @@ import useGetUpcomingMovies from "../hooks/useGetUpcomingMovies";
 import MainContainer from "./BrowserMainContainer/MainContainer";
 import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
 import SecondaryContainer from "./BrowserSecondaryContainer/SecondaryContainer";
+import BigTrailer from "./BrowserSecondaryContainer/BigTrailer";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
   useGetNowPlayingMovies();
@@ -13,11 +15,17 @@ const Browse = () => {
   useGetTopRatedMovies();
   useGetUpcomingMovies();
 
+  const fullScreen = useSelector((store) => store.loading?.fullScreen);
+
   return (
-    <div>
+    <div className="relative">
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+          <MainContainer />
+          <SecondaryContainer />
+       {fullScreen && 
+        <BigTrailer />
+       }
+      
       <Footer />
     </div>
   );

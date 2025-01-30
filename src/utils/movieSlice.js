@@ -10,6 +10,7 @@ const movieSlice = createSlice({
     upcomingMovies: null,
     metaData: [],
     selectedMovie: null,
+    selectedForLarge: null,
   },
   reducers: {
     addNowPlayingMovies: (state, action) => {
@@ -43,6 +44,9 @@ const movieSlice = createSlice({
     addSelectedMovie: (state, action) => {
       state.selectedMovie = action.payload;
     },
+    addSelectedForLarge: (state, action) => {
+      state.selectedForLarge = action.payload;
+    },
   },
 });
 export const {
@@ -53,5 +57,6 @@ export const {
   addUpcomingMovies,
   addMetaData,
   addSelectedMovie,
+  addSelectedForLarge,
 } = movieSlice.actions;
 export default movieSlice.reducer;
