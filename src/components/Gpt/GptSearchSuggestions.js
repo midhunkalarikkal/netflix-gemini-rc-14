@@ -1,11 +1,11 @@
-// import React from 'react'
+import React from 'react'
 
-// const GptSearchSuggestions = () => {
-//   return (
-//     <div className='w-full p-10'>
+const GptSearchSuggestions = () => {
+  return (
+    <div className='w-full p-10'>
 
-//     </div>
-//   )
-// }
+    </div>
+  )
+}
 
-// export default GptSearchSuggestions
+export default GptSearchSuggestions

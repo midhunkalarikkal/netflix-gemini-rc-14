@@ -8,6 +8,7 @@ import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
 import SecondaryContainer from "./BrowserSecondaryContainer/SecondaryContainer";
 import BigTrailer from "./BrowserSecondaryContainer/BigTrailer";
 import { useSelector } from "react-redux";
+import GptSearch from "./Gpt/GptSearch";
 
 const Browse = () => {
   useGetNowPlayingMovies();
@@ -16,12 +17,19 @@ const Browse = () => {
   useGetUpcomingMovies();
 
   const fullScreen = useSelector((store) => store.loading?.fullScreen);
+  const showGptSearch = useSelector((store) => store.gpt?.showGptSearch);
 
   return (
     <div className="relative">
       <Header />
-          <MainContainer />
-          <SecondaryContainer />
+      {showGptSearch ? (
+        <GptSearch />
+      ) : (
+        <>
+        <MainContainer />
+        <SecondaryContainer />
+        </>
+      )}
        {fullScreen && 
         <BigTrailer />
        }
