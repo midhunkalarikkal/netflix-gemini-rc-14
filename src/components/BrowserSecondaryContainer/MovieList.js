@@ -1,6 +1,7 @@
+import React from "react";
 import MovieCard from "./MovieCard";
 
-const MovieList = ({ title, movies }) => {
+const MovieList = React.memo(({ title, movies }) => {
   return (
     <div className="pl-3 md:pl-6 py-1 md-py-2 relative">
       <h3 className="text-white font-bold text-lg md:text-xl lg:text-2xl py-4">
@@ -17,6 +18,6 @@ const MovieList = ({ title, movies }) => {
       </div>
     </div>
   );
-};
+});
 
 export default MovieList;

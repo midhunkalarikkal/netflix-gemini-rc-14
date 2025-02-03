@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addSelectedForLarge, addSelectedMovie } from "../../utils/movieSlice";
 import { toggleFullScreen } from "../../utils/loadingSlice";
+import React from "react";
 
-const CardExpand = ({ movieId, list, trailer }) => {
+const CardExpand = React.memo(({ movieId, list, trailer }) => {
   const dispatch = useDispatch()
   const movie = useSelector((store) => {
     const moviesList = store.movies?.[list];
@@ -61,6 +62,6 @@ const CardExpand = ({ movieId, list, trailer }) => {
       </div>
     </div>
   );
-};
+});
 
 export default CardExpand;

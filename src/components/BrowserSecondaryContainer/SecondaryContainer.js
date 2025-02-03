@@ -29,10 +29,8 @@ const SecondaryContainer = () => {
     if (movies.upcomingMovies?.length > 0) {
       newLoadingStates.upcoming = false;
     }
-    setTimeout(() => {
-      setLoadingStates(newLoadingStates);
-    }, 2000);
-  }, [movies]);
+    setLoadingStates(newLoadingStates);
+  }, [movies,loadingStates]);
 
   const { movieId, trailer: { key } = {}, list } = trailerData || {};
 
