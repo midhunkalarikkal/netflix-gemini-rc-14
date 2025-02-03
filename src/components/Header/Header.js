@@ -75,11 +75,11 @@ const Header = () => {
             alt="User Icon"
           />
           <button
-            class="relative inline-flex h-8 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none md:block"
+            className="relative inline-flex h-8 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none md:block"
             onClick={handleGptSearch}
           >
-            <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_180deg_at_50%_50%,#ffffff_0%,#000000_50%,#E50914_100%)]"></span>
-            <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined hover:text-red-600">
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_180deg_at_50%_50%,#ffffff_0%,#000000_50%,#E50914_100%)]"></span>
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined hover:text-red-600">
               {!showGptSearch ? "GPT Search" : "Home"}
             </span>
           </button>

@@ -7,6 +7,7 @@ const loadingSlice = createSlice({
     mainContainerVideoTitleLoading: true,
     secondaryContainer: true,
     fullScreen: false,
+    movieListLoading: true,
   },
   reducers: {
     toggleMainContainerVideoBackgroundLoading: (state, action) => {
@@ -20,9 +21,12 @@ const loadingSlice = createSlice({
     },
     toggleFullScreen: (state, action) => {
       state.fullScreen = action.payload;
+    },
+    toggleMovieListLoading: (state, action) => {
+      state.movieListLoading = action.payload;
     }
   },
 });
 
-export const { toggleLoading, toggleMainContainerVideoBackgroundLoading, toggleMainContainerVideoTitleLoading, toggleFullScreen } = loadingSlice.actions;
+export const { toggleLoading, toggleMainContainerVideoBackgroundLoading, toggleMainContainerVideoTitleLoading, toggleFullScreen, toggleMovieListLoading } = loadingSlice.actions;
 export default loadingSlice.reducer;

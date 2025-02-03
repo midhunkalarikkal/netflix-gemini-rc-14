@@ -18,12 +18,14 @@ const MovieCard = React.memo(({ movieId, title }) => {
   const trailerData = useSelector((store) =>
     store.movies?.trailerVideo.find((trailer) => trailer.movieId === movieId)
   );
+
   if (trailerData) {
     movieToSelect = {
       ...trailerData,
       title: title || "Untitled Movie",
     };
   }
+  
   const onClickHandle = () => {
     dispatch(addSelectedMovie(movieToSelect));
   };

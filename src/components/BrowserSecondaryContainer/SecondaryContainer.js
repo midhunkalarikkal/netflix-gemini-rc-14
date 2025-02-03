@@ -7,48 +7,73 @@ import MovieListShimmer from "../Shimmer/MovieListShimmer";
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
   const trailerData = useSelector((store) => store.movies?.selectedMovie);
-  const [loading, setLoading] = useState(true);
+  const [loadingStates, setLoadingStates] = useState({
+    nowPlaying: true,
+    popular: true,
+    topRated: true,
+    upcoming: true,
+  });
 
   useEffect(() => {
-    const interval = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(interval);
-  },[]);
+    const newLoadingStates = { ...loadingStates };
 
-  const {
-    movieId,
-    trailer: { key } = {},
-    list,
-  } = trailerData ? trailerData : {};
+    if (movies.nowPlayingMovies?.length > 0) {
+      newLoadingStates.nowPlaying = false;
+    }
+    if (movies.popularMovies?.length > 0) {
+      newLoadingStates.popular = false;
+    }
+    if (movies.topRatedMovies?.length > 0) {
+      newLoadingStates.topRated = false;
+    }
+    if (movies.upcomingMovies?.length > 0) {
+      newLoadingStates.upcoming = false;
+    }
+    setTimeout(() => {
+      setLoadingStates(newLoadingStates);
+    }, 2000);
+  }, [movies]);
 
-  const renderMovieSection = (title, movieList) => (
-    <>
-      {movieList && <MovieList title={title} movies={movieList} />}
-      {trailerData?.title === title && (
-        <CardExpand movieId={movieId} trailer={key} list={list} />
+  const { movieId, trailer: { key } = {}, list } = trailerData || {};
+
+  const renderMovieSection = (title, movieList, loadingState) => (
+    <div>
+      {loadingState ? (
+        <MovieListShimmer />
+      ) : (
+        <>
+          <MovieList title={title} movies={movieList} />
+          {trailerData?.title === title && (
+            <CardExpand movieId={movieId} trailer={key} list={list} />
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 
   return (
-    <>
-      {loading ? (
-        <div className="md:-mt-16 lg:-mt-40 pl-1 md:pl-2 lg:pl-4 relative">
-          <MovieListShimmer />
-          <MovieListShimmer />
-          <MovieListShimmer />
-          <MovieListShimmer />
-        </div>
-      ) : (
-        <div className="-mt-6 md:-mt-16 lg:-mt-40 pl-1 md:pl-2 lg:pl-4 relative">
-          {renderMovieSection("Now Playing", movies.nowPlayingMovies)}
-          {renderMovieSection("Popular Movies", movies.popularMovies)}
-          {renderMovieSection("Top Rated Movies", movies.topRatedMovies)}
-          {renderMovieSection("Upcoming Movies", movies.upcomingMovies)}
-        </div>
+    <div className="md:-mt-16 lg:-mt-40 pl-1 md:pl-2 lg:pl-4 relative">
+      {renderMovieSection(
+        "Now Playing",
+        movies.nowPlayingMovies,
+        loadingStates.nowPlaying
       )}
-    </>
+      {renderMovieSection(
+        "Popular Movies",
+        movies.popularMovies,
+        loadingStates.popular
+      )}
+      {renderMovieSection(
+        "Top Rated Movies",
+        movies.topRatedMovies,
+        loadingStates.topRated
+      )}
+      {renderMovieSection(
+        "Upcoming Movies",
+        movies.upcomingMovies,
+        loadingStates.upcoming
+      )}
+    </div>
   );
 };
 
