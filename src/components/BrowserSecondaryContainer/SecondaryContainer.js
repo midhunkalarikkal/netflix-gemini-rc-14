@@ -29,8 +29,10 @@ const SecondaryContainer = () => {
     if (movies.upcomingMovies?.length > 0) {
       newLoadingStates.upcoming = false;
     }
-    setLoadingStates(newLoadingStates);
-  }, [movies,loadingStates]);
+    if (JSON.stringify(newLoadingStates) !== JSON.stringify(loadingStates)) {
+      setLoadingStates(newLoadingStates);
+    }
+  }, [movies]);
 
   const { movieId, trailer: { key } = {}, list } = trailerData || {};
 
