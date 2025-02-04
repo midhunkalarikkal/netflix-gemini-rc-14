@@ -74,7 +74,7 @@ const Header = () => {
             src={USER_LOGO}
             alt="User Icon"
           />
-          <button
+          {/* <button
             className="relative inline-flex h-8 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none md:block"
             onClick={handleGptSearch}
           >
@@ -82,7 +82,7 @@ const Header = () => {
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined hover:text-red-600">
               {!showGptSearch ? "GPT Search" : "Home"}
             </span>
-          </button>
+          </button> */}
           <button
             className="font-semibold text-md text-white px-2 py-1 rounded-lg"
             style={{ backgroundColor: "#E50914" }}
@@ -109,12 +109,12 @@ const Header = () => {
                 <li className="text-center border-b border-gray-500 py-2 font-medium text-xs sm:text-sm">
                   Hi, <span className="font-semibold">{user.displayName}</span>
                 </li>
-                <li
+                {/* <li
                   className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
                   onClick={handleGptSearch}
                 >
                   {!showGptSearch ? "GPT Search" : "Home"}
-                </li>
+                </li> */}
                 <li
                   className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
                   onClick={handleSignOut}
