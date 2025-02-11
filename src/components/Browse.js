@@ -26,8 +26,8 @@ const Browse = () => {
         <GptSearch />
       ) : (
         <>
-        <MainContainer />
-        <SecondaryContainer />
+        {/* <MainContainer /> */}
+        {/* <SecondaryContainer /> */}
         </>
       )}
        {fullScreen && 

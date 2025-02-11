@@ -1,12 +1,13 @@
 import { auth } from "../../utils/firebase";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LOGO, USER_LOGO } from "../../utils/constants";
+import { LOGO, supportedLanguages, USER_LOGO } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../../utils/userSlice";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 import { toggleGptSearchView } from "../../utils/gptSlice";
+import { changeLanguage } from "../../utils/configSlice";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -55,6 +56,10 @@ const Header = () => {
     dispatch(toggleGptSearchView());
   };
 
+  const handleSelect = (value) => {
+    dispatch(changeLanguage(value));
+  }
+
   return (
     <div className="absolute flex px-6 md:px-10 py-2 w-full z-50 h-10 md:h-18 ">
       <div className="w-1/2">
@@ -74,7 +79,19 @@ const Header = () => {
             src={USER_LOGO}
             alt="User Icon"
           />
-          {/* <button
+            {showGptSearch && (
+              <select
+                onChange={(e) => handleSelect(e.target.value)}
+                className="md:block h-8 px-1 md:px-2 bg-black text-white rounded-md shadow border border-red-600 focus:outline-none"
+              >
+                {supportedLanguages.map((lang) => (
+                  <option key={lang.identifier} value={lang.identifier} className="text-white">
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            )}
+          <button
             className="relative inline-flex h-8 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none md:block"
             onClick={handleGptSearch}
           >
@@ -82,7 +99,7 @@ const Header = () => {
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined hover:text-red-600">
               {!showGptSearch ? "GPT Search" : "Home"}
             </span>
-          </button> */}
+          </button>
           <button
             className="font-semibold text-md text-white px-2 py-1 rounded-lg"
             style={{ backgroundColor: "#E50914" }}
@@ -109,12 +126,12 @@ const Header = () => {
                 <li className="text-center border-b border-gray-500 py-2 font-medium text-xs sm:text-sm">
                   Hi, <span className="font-semibold">{user.displayName}</span>
                 </li>
-                {/* <li
+                <li
                   className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
                   onClick={handleGptSearch}
                 >
                   {!showGptSearch ? "GPT Search" : "Home"}
-                </li> */}
+                </li>
                 <li
                   className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
                   onClick={handleSignOut}

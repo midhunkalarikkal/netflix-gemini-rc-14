@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import openai from "../../utils/opeai";
+import lang from "../../utils/languageConstants";
+import { useSelector } from "react-redux";
 
 const GptSearchBar = () => {
   const searchText = useRef(null);
+  const langKey = useSelector((store) => store.config.lang);
 
   const handleGptSearchClick = async () => {
-    console.log("searchText : ", searchText.current.value);
     const gptQuery =
       "Act a as movie recommendation system and suggest some movies for the query" +
       searchText.current.value +
@@ -14,7 +16,6 @@ const GptSearchBar = () => {
       messages: [{ role: "user", content: gptQuery }],
       model: "gpt-3.5-turbo",
     });
-    console.log("gptResults : ", gptResults.choices);
   };
 
   return (
@@ -27,13 +28,13 @@ const GptSearchBar = () => {
           ref={searchText}
           className="w-8/12 p-1 md:px-5 md:py-3 text-xs md:text-md rounded-lg shadow-md shadow-white"
           type="text"
-          placeholder="What you want to wantch now.."
+          placeholder={lang[langKey].searchPlaceHolder}
         />
         <button
           className="w-2/12 mx-2 p-1 md:px-5 md:py-3 text-xs md:text-md bg-[#E50914] text-white md:text-md font-bold rounded-lg shadow-md shadow-[#E50914]"
           onClick={handleGptSearchClick}
         >
-          Search
+          {lang[langKey].search}
         </button>
       </form>
     </div>

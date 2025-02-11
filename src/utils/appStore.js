@@ -1,8 +1,9 @@
+import gptReducer  from "./gptSlice";
 import userReducer from './userSlice';
 import moviesReducer from './movieSlice';
+import configReducer from "./configSlice";
 import loadingReducer from './loadingSlice';
 import { configureStore } from "@reduxjs/toolkit";
-import gptReducer  from "./gptSlice";
 
 const appStore = configureStore({
     reducer : {
@@ -10,6 +11,7 @@ const appStore = configureStore({
         movies : moviesReducer,
         loading : loadingReducer,
         gpt: gptReducer,
+        config: configReducer
     }
 })
 
