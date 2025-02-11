@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const gptSlice = createSlice({
+const geminiSlice = createSlice({
     name: "gpt",
     initialState: {
         showGptSearch: false,
@@ -12,5 +12,5 @@ const gptSlice = createSlice({
     }
 });
 
-export const { toggleGptSearchView } = gptSlice.actions;
-export default gptSlice.reducer;
+export const { toggleGptSearchView } = geminiSlice.actions;
+export default geminiSlice.reducer;

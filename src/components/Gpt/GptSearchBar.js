@@ -1,21 +1,29 @@
 import { useRef } from "react";
-import openai from "../../utils/opeai";
 import lang from "../../utils/languageConstants";
 import { useSelector } from "react-redux";
+import model from "../../utils/gemini";
+import { API_OPTIONS, GEMINI_QUERY_END, GEMINI_QUERY_INITAL } from "../../utils/constants";
 
 const GptSearchBar = () => {
   const searchText = useRef(null);
   const langKey = useSelector((store) => store.config.lang);
 
+  const searchMovie = async (movieName) => {
+    const data = await fetch("https://api.themoviedb.org/3/search/movie?query="+movieName+"&include_adult=false&language=en-US&page=1",API_OPTIONS);
+    const json = await data.json();
+    return json.results;
+  }
+
   const handleGptSearchClick = async () => {
     const gptQuery =
-      "Act a as movie recommendation system and suggest some movies for the query" +
+      GEMINI_QUERY_INITAL +
       searchText.current.value +
-      ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Godar, Sholay, Koi Mil Gaya, Pathan, Ra-One";
-    const gptResults = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
+      GEMINI_QUERY_END;
+      const result = await model.generateContent(gptQuery);
+      const movies = result.response.text().split(",");
+      const promiseArray = movies.map(movie => searchMovie(movie));
+      const searchedMoviesData = await Promise.all(promiseArray);
+      console.log("searchedMoviesData : ",searchedMoviesData);
   };
 
   return (

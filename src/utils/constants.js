@@ -14,8 +14,6 @@ export const IMG_CDN = "https://image.tmdb.org/t/p/w500/";
 
 export const LOGIN_BG_IMAGE = "https://assets.nflxext.com/ffe/siteui/vlv3/74d734ca-0eab-4cd9-871f-bca01823d872/web/IN-en-20241021-TRIFECTA-perspective_2277eb50-9da3-4fdf-adbe-74db0e9ee2cf_large.jpg";
 
-export const OPENAI_KEY = 1234;
-
 export const supportedLanguages = [
   {identifier: "en", name : "English"},
   {identifier: "hi", name : "Hindi"},
@@ -23,3 +21,11 @@ export const supportedLanguages = [
   {identifier: "ml", name : "Mlayalam"},
   {identifier: "ta", name : "Tamil"}
 ]
+
+export const GEMINI_QUERY_INITAL = "Act a as movie recommendation system and suggest some movies for the query"
+
+export const GEMINI_QUERY_END = ".only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Inception, Zindagi Na Milegi Dobara, Drishyam, Vikram, RRR, Kantara"
+
+export const GEMINI_SEARCH_API_INITIAL = "https://api.themoviedb.org/3/search/movie?query="
+
+export const GEMINI_SEARCH_API_END = "&include_adult=false&language=en-US&page=1"

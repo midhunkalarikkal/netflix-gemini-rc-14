@@ -1,4 +1,4 @@
-import gptReducer  from "./gptSlice";
+import gptReducer  from "./geminiSlice";
 import userReducer from './userSlice';
 import moviesReducer from './movieSlice';
 import configReducer from "./configSlice";
