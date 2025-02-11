@@ -58,7 +58,7 @@ const Header = () => {
 
   const handleSelect = (value) => {
     dispatch(changeLanguage(value));
-  }
+  };
 
   return (
     <div className="absolute flex px-6 md:px-10 py-2 w-full z-50 h-10 md:h-18 ">
@@ -79,18 +79,22 @@ const Header = () => {
             src={USER_LOGO}
             alt="User Icon"
           />
-            {showGptSearch && (
-              <select
-                onChange={(e) => handleSelect(e.target.value)}
-                className="md:block h-8 px-1 md:px-2 bg-black text-white rounded-md shadow border border-red-600 focus:outline-none"
-              >
-                {supportedLanguages.map((lang) => (
-                  <option key={lang.identifier} value={lang.identifier} className="text-white">
-                    {lang.name}
-                  </option>
-                ))}
-              </select>
-            )}
+          {showGptSearch && (
+            <select
+              onChange={(e) => handleSelect(e.target.value)}
+              className="md:block h-8 px-1 md:px-2 bg-black text-white rounded-md shadow border border-red-600 focus:outline-none"
+            >
+              {supportedLanguages.map((lang) => (
+                <option
+                  key={lang.identifier}
+                  value={lang.identifier}
+                  className="text-white"
+                >
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
           <button
             className="relative inline-flex h-8 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none md:block"
             onClick={handleGptSearch}
@@ -126,8 +130,28 @@ const Header = () => {
                 <li className="text-center border-b border-gray-500 py-2 font-medium text-xs sm:text-sm">
                   Hi, <span className="font-semibold">{user.displayName}</span>
                 </li>
+
+                {showGptSearch && (
+                  <li className="text-center border-b border-gray-500 py-2 font-medium text-xs sm:text-sm">
+                    <select
+                      onChange={(e) => handleSelect(e.target.value)}
+                      className="md:block h-8 px-1 md:px-2 bg-black text-white rounded-md shadow hover:border border-red-600 focus:outline-none"
+                    >
+                      {supportedLanguages.map((lang) => (
+                        <option
+                          key={lang.identifier}
+                          value={lang.identifier}
+                          className="text-white"
+                        >
+                          {lang.name}
+                        </option>
+                      ))}
+                    </select>
+                  </li>
+                )}
+
                 <li
-                  className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
+                  className="text-center py-2 font-medium border-b border-gray-500 cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
                   onClick={handleGptSearch}
                 >
                   {!showGptSearch ? "GPT Search" : "Home"}
