@@ -14,7 +14,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-  const showGptSearch = useSelector((store) => store.gpt?.showGptSearch);
+  const showGeminiSearch = useSelector((store) => store.gemini?.showGeminiSearch);
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -79,7 +79,7 @@ const Header = () => {
             src={USER_LOGO}
             alt="User Icon"
           />
-          {showGptSearch && (
+          {showGeminiSearch && (
             <select
               onChange={(e) => handleSelect(e.target.value)}
               className="md:block h-8 px-1 md:px-2 bg-black text-white rounded-md shadow border border-red-600 focus:outline-none"
@@ -101,7 +101,7 @@ const Header = () => {
           >
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_180deg_at_50%_50%,#ffffff_0%,#000000_50%,#E50914_100%)]"></span>
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined hover:text-red-600">
-              {!showGptSearch ? "GPT Search" : "Home"}
+              {!showGeminiSearch ? "GPT Search" : "Home"}
             </span>
           </button>
           <button
@@ -131,7 +131,7 @@ const Header = () => {
                   Hi, <span className="font-semibold">{user.displayName}</span>
                 </li>
 
-                {showGptSearch && (
+                {showGeminiSearch && (
                   <li className="text-center border-b border-gray-500 py-2 font-medium text-xs sm:text-sm">
                     <select
                       onChange={(e) => handleSelect(e.target.value)}
@@ -154,7 +154,7 @@ const Header = () => {
                   className="text-center py-2 font-medium border-b border-gray-500 cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
                   onClick={handleGptSearch}
                 >
-                  {!showGptSearch ? "GPT Search" : "Home"}
+                  {!showGeminiSearch ? "GPT Search" : "Home"}
                 </li>
                 <li
                   className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"

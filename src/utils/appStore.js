@@ -1,4 +1,4 @@
-import gptReducer  from "./geminiSlice";
+import geminiReducer  from "./geminiSlice";
 import userReducer from './userSlice';
 import moviesReducer from './movieSlice';
 import configReducer from "./configSlice";
@@ -10,7 +10,7 @@ const appStore = configureStore({
         user : userReducer,
         movies : moviesReducer,
         loading : loadingReducer,
-        gpt: gptReducer,
+        gemini: geminiReducer,
         config: configReducer
     }
 })

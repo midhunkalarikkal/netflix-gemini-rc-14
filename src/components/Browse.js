@@ -17,17 +17,17 @@ const Browse = () => {
   useGetUpcomingMovies();
 
   const fullScreen = useSelector((store) => store.loading?.fullScreen);
-  const showGptSearch = useSelector((store) => store.gpt?.showGptSearch);
+  const showGeminiSearch = useSelector((store) => store.gemini?.showGeminiSearch);
 
   return (
     <div className="relative">
       <Header />
-      {showGptSearch ? (
+      {showGeminiSearch ? (
         <GptSearch />
       ) : (
         <>
-        {/* <MainContainer /> */}
-        {/* <SecondaryContainer /> */}
+        <MainContainer />
+        <SecondaryContainer />
         </>
       )}
        {fullScreen && 
