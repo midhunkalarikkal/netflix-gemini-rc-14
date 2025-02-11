@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../../utils/userSlice";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import toast from "react-hot-toast";
-import { toggleGptSearchView } from "../../utils/geminiSlice";
+import { toggleGeminiearchView } from "../../utils/geminiSlice";
 import { changeLanguage } from "../../utils/configSlice";
 
 const Header = () => {
@@ -53,7 +53,7 @@ const Header = () => {
   };
 
   const handleGptSearch = () => {
-    dispatch(toggleGptSearchView());
+    dispatch(toggleGeminiearchView());
   };
 
   const handleSelect = (value) => {
