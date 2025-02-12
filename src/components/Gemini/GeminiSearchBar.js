@@ -32,11 +32,12 @@ const GptSearchBar = () => {
       return;
     }
     const gptQuery =
-      GEMINI_QUERY_INITAL + searchText.current.value + GEMINI_QUERY_END;
+      GEMINI_QUERY_INITAL+searchText.current.value+GEMINI_QUERY_END;
 
-    toast.promise(
-      (async () => {
+
         const result = await model.generateContent(gptQuery);
+        console.log("result : ",result);
+        console.log("result.response : ",result.response.text());
         const movies = result.response.text().split(",");
         const promiseArray = movies.map((movie) => searchMovie(movie));
         const searchedMoviesData = await Promise.all(promiseArray);
@@ -46,13 +47,9 @@ const GptSearchBar = () => {
             geminiTmdbResults: searchedMoviesData,
           })
         );
-      })(),
-      {
-        pending: "Fetching movie recommendations...",
-        success: "Movies fetched successfully!",
-        error: "Failed to fetch movies. Try again!",
-      }
-    );
+    
+      
+    
   };
 
   return (
