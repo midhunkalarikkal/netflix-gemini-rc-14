@@ -7,12 +7,17 @@ import BigTrailerShimmer from "../Shimmer/BigTrailerShimmer";
 
 const BigTrailer = React.memo(({ selectedMovie }) => {
 
-  const { movieId, title } = selectedMovie;
+  const { movieId, title, gemini } = selectedMovie;
   const dispatch = useDispatch();
 
-  const listName = useMemo(() => toCamelCase(title), [title]);
-  const movies = useSelector((store) => store.movies?.[listName]);
-  const movie = movies.find((movie) => movie.id === movieId);
+  const geminiMovies = useSelector((store) => (gemini ? store.gemini.geminiMovieResults : null))
+  const geminiMoviesArray = geminiMovies && Object.values(geminiMovies.flat());
+
+  const listName = useMemo(() => (!gemini ? toCamelCase(title) : null), [gemini, title]);
+  const movies = useSelector((store) => (!gemini ? store.movies?.[listName] : null));
+
+  const movie = gemini ? geminiMoviesArray?.find((movie) => movie.id === movieId) : movies?.find((movie) => movie.id === movieId);
+
   const {
     adult,
     original_language,
@@ -32,9 +37,9 @@ const BigTrailer = React.memo(({ selectedMovie }) => {
   };
 
   return (
-    <div className="w-full h-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10">
+    <div className="w-full h-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 z-50">
       <button
-        className="absolute top-0 right-10 hover:bg-red-500 text-white px-1 md:px-3 py-0 md:py-1 rounded border-2 border-red-500 text-sm md:text-lg bg-opacity-60 bg-black"
+        className="absolute top-0 right-10 hover:bg-red-600 text-white px-1 md:px-3 py-0 md:py-1 rounded border-2 border-red-600 text-sm md:text-lg bg-opacity-60 bg-black"
         onClick={handleBigTrailerClose}
       >
         Close

@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard";
 import MovieCardShimmer from "../Shimmer/MovieCardShimmer";
 import ListTitleShimmer from "../Shimmer/ListTitleShimmer";
 
-const MovieList = React.memo(({ title, movies }) => {
+const MovieList = React.memo(({ title, movies, gemini }) => {
 
   return (
     <div className="pl-3 md:pl-6 py-1 md-py-2 relative">
@@ -24,6 +24,7 @@ const MovieList = React.memo(({ title, movies }) => {
                     movieId={movie.id}
                     poster={movie.poster_path}
                     title={title}
+                    gemini={gemini}
                   />
                 ))
               : Array.from({ length: 10 }).map((_, index) => (

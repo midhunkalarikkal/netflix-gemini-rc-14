@@ -22,6 +22,10 @@ const Browse = () => {
   return (
     <div className="relative">
       <Header />
+      {selectedMovie && 
+        <BigTrailer selectedMovie={selectedMovie}/>
+       }
+
       {showGeminiSearch ? (
         <GptSearch />
       ) : (
@@ -30,10 +34,6 @@ const Browse = () => {
         <SecondaryContainer />
         </>
       )}
-       {selectedMovie && 
-        <BigTrailer selectedMovie={selectedMovie}/>
-       }
-      
       <Footer />
     </div>
   );
