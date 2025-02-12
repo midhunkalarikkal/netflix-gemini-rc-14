@@ -46,7 +46,7 @@ const BigTrailer = React.memo(({ selectedMovie }) => {
   };
 
   return (
-    <div className="w-full h-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 z-50">
+    <div className="w-10/12 h-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 z-50">
       <button
         className="absolute top-0 right-10 hover:bg-red-600 text-white px-1 md:px-3 py-0 md:py-1 rounded border-2 border-red-600 text-sm md:text-lg bg-opacity-60 bg-black"
         onClick={handleBigTrailerClose}
