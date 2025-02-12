@@ -17,7 +17,7 @@ const GptSearch = () => {
       </div>
       <div className="relative z-10 flex flex-col items-center">
         <GptSearchBar />
-        <div className="w-full max-h-[85vh] md:max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900 no-scrollbar">
+        <div className="w-full max-h-[85vh] md:max-h-[70vh] overflow-y-auto no-scrollbar">
           <GptSearchSuggestions />
         </div>
       </div>

@@ -1,8 +1,8 @@
 import React from "react";
 import Login from "./Login";
 import Browse from "./Browse";
-import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Bounce, ToastContainer } from 'react-toastify';
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -18,7 +18,19 @@ const Body = () => {
 
   return (
     <div>
-      <Toaster position="top-right" reverseOrder={false} />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <RouterProvider router={appRouter} />
     </div>
   );

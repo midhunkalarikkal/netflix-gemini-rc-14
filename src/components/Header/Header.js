@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import { auth } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";

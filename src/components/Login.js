@@ -1,6 +1,6 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
@@ -37,7 +37,7 @@ const Login = () => {
   const onSubmit = (data, e) => {
     e.preventDefault();
     if (!isValid) {
-      toast.error("Please fix the errors before submitting the form.");
+      toast.warning("Please fix the errors before submitting the form.");
       return;
     }
     if (isForgotPasswordForm) {
