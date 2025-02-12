@@ -10,7 +10,6 @@ const movieSlice = createSlice({
     logos: [],
     trailerVideos: [],
     selectedMovie: null,
-    selectedForLarge: null,
   },
   reducers: {
     addNowPlayingMovies: (state, action) => {
@@ -43,10 +42,7 @@ const movieSlice = createSlice({
     },
     addSelectedMovie: (state, action) => {
       state.selectedMovie = action.payload;
-    },
-    addSelectedForLarge: (state, action) => {
-      state.selectedForLarge = action.payload;
-    },
+    }
   },
 });
 export const {
@@ -57,6 +53,5 @@ export const {
   addUpcomingMovies,
   addLogo,
   addSelectedMovie,
-  addSelectedForLarge,
 } = movieSlice.actions;
 export default movieSlice.reducer;

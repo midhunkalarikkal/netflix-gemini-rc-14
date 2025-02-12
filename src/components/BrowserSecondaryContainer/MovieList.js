@@ -4,6 +4,7 @@ import MovieCardShimmer from "../Shimmer/MovieCardShimmer";
 import ListTitleShimmer from "../Shimmer/ListTitleShimmer";
 
 const MovieList = React.memo(({ title, movies }) => {
+
   return (
     <div className="pl-3 md:pl-6 py-1 md-py-2 relative">
       {title ? (
@@ -22,6 +23,7 @@ const MovieList = React.memo(({ title, movies }) => {
                     key={movie.id}
                     movieId={movie.id}
                     poster={movie.poster_path}
+                    title={title}
                   />
                 ))
               : Array.from({ length: 10 }).map((_, index) => (

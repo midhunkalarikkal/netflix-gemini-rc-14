@@ -1,14 +1,14 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
+import GptSearch from "./Gpt/GptSearch";
+import { useSelector } from "react-redux";
 import useGetPopularMovies from "../hooks/useGetPopularMovies";
+import BigTrailer from "./BrowserSecondaryContainer/BigTrailer";
 import useGetTopRatedMovies from "../hooks/useGetTopRatedMovies";
 import useGetUpcomingMovies from "../hooks/useGetUpcomingMovies";
 import MainContainer from "./BrowserMainContainer/MainContainer";
 import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
 import SecondaryContainer from "./BrowserSecondaryContainer/SecondaryContainer";
-import BigTrailer from "./BrowserSecondaryContainer/BigTrailer";
-import { useSelector } from "react-redux";
-import GptSearch from "./Gpt/GptSearch";
 
 const Browse = () => {
   useGetNowPlayingMovies();
@@ -16,8 +16,8 @@ const Browse = () => {
   useGetTopRatedMovies();
   useGetUpcomingMovies();
 
-  const fullScreen = useSelector((store) => store.loading?.fullScreen);
   const showGeminiSearch = useSelector((store) => store.gemini?.showGeminiSearch);
+  const selectedMovie = useSelector((store) => store.movies.selectedMovie);
 
   return (
     <div className="relative">
@@ -30,8 +30,8 @@ const Browse = () => {
         <SecondaryContainer />
         </>
       )}
-       {fullScreen && 
-        <BigTrailer />
+       {selectedMovie && 
+        <BigTrailer selectedMovie={selectedMovie}/>
        }
       
       <Footer />

@@ -1,15 +1,20 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { IMG_CDN } from "../../utils/constants";
+import { addSelectedMovie } from '../../utils/movieSlice';
 import MovieCardShimmer from "../Shimmer/MovieCardShimmer";
 
-const MovieCard = React.memo(({ movieId, poster }) => {
+const MovieCard = React.memo(({ movieId, poster, title }) => {
   
-  const onClickHandle = () => {};
+  const dispatch = useDispatch();
+  const onClickHandle = (movieId,title) => {
+    dispatch(addSelectedMovie({movieId, title}))
+  };
 
   return (
     <div
       className="w-24 md:w-44 lg:w-52 overflow-x bg-black relative"
-      onClick={onClickHandle}
+      onClick={() => onClickHandle(movieId,title)}
     >
       {!poster ? (
         <MovieCardShimmer />
