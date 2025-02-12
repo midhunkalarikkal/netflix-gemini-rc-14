@@ -1,7 +1,8 @@
-import { useEffect, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { addLogo } from "../utils/movieSlice";
 import { API_OPTIONS } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useCallback, useMemo } from "react";
+import { TMDB_BASE_URL, FETCH_MOVIE_TITLE_LOGO_END } from "../utils/constants";
 
 const useFetchLogo = (id) => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const useFetchLogo = (id) => {
 
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/images?language=en-US&include_image_language=en,null`,
+        `${TMDB_BASE_URL}${id}${FETCH_MOVIE_TITLE_LOGO_END}`,
         API_OPTIONS
       );
       const json = await response.json();

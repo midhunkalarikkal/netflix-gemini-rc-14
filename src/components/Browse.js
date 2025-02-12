@@ -11,6 +11,7 @@ import useGetNowPlayingMovies from "../hooks/useGetNowPlayingMovies";
 import SecondaryContainer from "./BrowserSecondaryContainer/SecondaryContainer";
 
 const Browse = () => {
+  
   useGetNowPlayingMovies();
   useGetPopularMovies();
   useGetTopRatedMovies();

@@ -1,13 +1,14 @@
+import toast from "react-hot-toast";
 import { auth } from "../../utils/firebase";
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LOGO, supportedLanguages, USER_LOGO } from "../../utils/constants";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { changeLanguage } from "../../utils/configSlice";
+import { addSelectedMovie } from "../../utils/movieSlice";
 import { addUser, removeUser } from "../../utils/userSlice";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import toast from "react-hot-toast";
 import { toggleGeminiearchView } from "../../utils/geminiSlice";
-import { changeLanguage } from "../../utils/configSlice";
+import { HAMBURGER_IMG, LOGO, supportedLanguages, USER_LOGO } from "../../utils/constants";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -52,8 +53,9 @@ const Header = () => {
     setOpenMenu((prev) => !prev);
   };
 
-  const handleGptSearch = () => {
+  const handleGeminiSearch = () => {
     dispatch(toggleGeminiearchView());
+    dispatch(addSelectedMovie(null));
   };
 
   const handleSelect = (value) => {
@@ -79,6 +81,15 @@ const Header = () => {
             src={USER_LOGO}
             alt="User Icon"
           />
+          <button
+            className="relative inline-flex h-8 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none md:block"
+            onClick={handleGeminiSearch}
+          >
+           <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_180deg_at_50%_50%,#ffffff_0%,#000000_50%,#E50914_100%)]"></span>
+            <span className={`inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined`}>
+              {!showGeminiSearch ? "Gemini Search" : "Home"}
+            </span>
+          </button>
           {showGeminiSearch && (
             <select
               onChange={(e) => handleSelect(e.target.value)}
@@ -96,15 +107,6 @@ const Header = () => {
             </select>
           )}
           <button
-            className="relative inline-flex h-8 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none md:block"
-            onClick={handleGptSearch}
-          >
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_180deg_at_50%_50%,#ffffff_0%,#000000_50%,#E50914_100%)]"></span>
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined hover:text-red-600">
-              {!showGeminiSearch ? "GPT Search" : "Home"}
-            </span>
-          </button>
-          <button
             className="font-semibold text-md text-white px-2 py-1 rounded-lg"
             style={{ backgroundColor: "#E50914" }}
             onClick={handleSignOut}
@@ -120,7 +122,7 @@ const Header = () => {
               className="w-6 h-6 cursor-pointer ml-auto"
               width="50"
               height="50"
-              src="https://img.icons8.com/ios-filled/50/e50914/menu--v1.png"
+              src={HAMBURGER_IMG}
               alt="menu--v1"
             />
           </div>
@@ -152,7 +154,7 @@ const Header = () => {
 
                 <li
                   className="text-center py-2 font-medium border-b border-gray-500 cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
-                  onClick={handleGptSearch}
+                  onClick={handleGeminiSearch}
                 >
                   {!showGeminiSearch ? "GPT Search" : "Home"}
                 </li>

@@ -1,17 +1,18 @@
 import { useRef } from "react";
+import model from "../../utils/gemini";
 import lang from "../../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
-import model from "../../utils/gemini";
-import { API_OPTIONS, GEMINI_QUERY_END, GEMINI_QUERY_INITAL } from "../../utils/constants";
 import { addGeminiMovieResult } from "../../utils/geminiSlice";
+import { API_OPTIONS, GEMINI_QUERY_END, GEMINI_QUERY_INITAL, GEMINI_SEARCH_API_INITIAL, GEMINI_SEARCH_API_END } from "../../utils/constants";
 
 const GptSearchBar = () => {
+  
   const searchText = useRef(null);
   const langKey = useSelector((store) => store.config.lang);
   const dispatch = useDispatch();
 
   const searchMovie = async (movieName) => {
-    const data = await fetch("https://api.themoviedb.org/3/search/movie?query="+movieName+"&include_adult=false&language=en-US&page=1",API_OPTIONS);
+    const data = await fetch(GEMINI_SEARCH_API_INITIAL+movieName+GEMINI_SEARCH_API_END,API_OPTIONS);
     const json = await data.json();
     return json.results;
   }
@@ -36,12 +37,12 @@ const GptSearchBar = () => {
       >
         <input
           ref={searchText}
-          className="w-8/12 p-1 md:px-5 md:py-3 text-xs md:text-md rounded-lg shadow-md shadow-white"
+          className="w-8/12 p-1 md:px-5 md:py-3 text-xs md:text-lg rounded-lg shadow-md shadow-white"
           type="text"
           placeholder={lang[langKey].searchPlaceHolder}
         />
         <button
-          className="w-2/12 mx-2 p-1 md:px-5 md:py-3 text-xs md:text-md bg-[#E50914] text-white md:text-md font-bold rounded-lg shadow-md shadow-[#E50914]"
+          className="w-2/12 mx-2 p-1 md:px-5 md:py-3 text-xs md:text-lg bg-[#E50914] text-white md:text-md font-bold rounded-lg shadow-md shadow-[#E50914]"
           onClick={handleGptSearchClick}
         >
           {lang[langKey].search}

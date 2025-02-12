@@ -4,7 +4,6 @@ import MovieCardShimmer from "../Shimmer/MovieCardShimmer";
 import ListTitleShimmer from "../Shimmer/ListTitleShimmer";
 
 const MovieList = React.memo(({ title, movies, gemini }) => {
-
   return (
     <div className="pl-3 md:pl-6 py-1 md-py-2 relative">
       {title ? (

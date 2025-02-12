@@ -4,12 +4,13 @@ import { IMG_CDN } from "../../utils/constants";
 import { addSelectedMovie } from "../../utils/movieSlice";
 
 const MovieCard = React.memo(({ movieId, poster, title, gemini }) => {
+  
   const dispatch = useDispatch();
   const onClickHandle = (movieId, title, gemini) => {
     dispatch(addSelectedMovie({ movieId, title, gemini }));
   };
 
-  if(!poster) return null;
+  if (!poster) return null;
 
   return (
     <div

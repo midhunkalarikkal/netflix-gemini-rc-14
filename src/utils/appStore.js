@@ -1,15 +1,13 @@
-import geminiReducer  from "./geminiSlice";
 import userReducer from './userSlice';
 import moviesReducer from './movieSlice';
 import configReducer from "./configSlice";
-import loadingReducer from './loadingSlice';
+import geminiReducer  from "./geminiSlice";
 import { configureStore } from "@reduxjs/toolkit";
 
 const appStore = configureStore({
     reducer : {
         user : userReducer,
         movies : moviesReducer,
-        loading : loadingReducer,
         gemini: geminiReducer,
         config: configReducer
     }

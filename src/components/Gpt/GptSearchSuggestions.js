@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import MovieList from "../BrowserSecondaryContainer/MovieList";
 
 const GptSearchSuggestions = () => {
+  
   const { movieNames, geminiMovieResults } = useSelector(
     (store) => store.gemini
   );
@@ -12,7 +13,12 @@ const GptSearchSuggestions = () => {
   return (
     <div className="w-full p-10">
       {movieNames.map((movieName, index) => (
-        <MovieList key={movieName} title={movieName} movies={geminiMovieResults[index]} gemini={true}/>
+        <MovieList
+          key={movieName}
+          title={movieName}
+          movies={geminiMovieResults[index]}
+          gemini={true}
+        />
       ))}
     </div>
   );

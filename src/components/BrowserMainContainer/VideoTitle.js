@@ -1,13 +1,12 @@
 import React from "react";
 import { IMG_CDN } from "../../utils/constants";
-import VideoTitleShimmer from "../Shimmer/VideoTitleShimmer";
 import useFetchLogo from "../../hooks/useFetchLogo";
+import VideoTitleShimmer from "../Shimmer/VideoTitleShimmer";
 
 const VideoTitle = React.memo(({ movie }) => {
 
   const { original_title, overview, id } = movie;
   const logo = useFetchLogo(id);
-
 
   return (
     <div className="absolute bg-gradient-to-r from-black w-screen aspect-video">

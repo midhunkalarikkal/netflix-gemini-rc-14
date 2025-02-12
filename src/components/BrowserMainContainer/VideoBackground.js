@@ -1,9 +1,9 @@
 import React from "react";
-import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
 import useFetchTrailer from "../../hooks/useFetchTrailer";
+import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
+import { IFRAME_URL_END, IFRAME_URL_START } from "../../utils/constants";
 
 const VideoBackground = React.memo(({ id }) => {
-  
   const trailer = useFetchTrailer(id);
 
   return (
@@ -15,7 +15,12 @@ const VideoBackground = React.memo(({ id }) => {
           <iframe
             key={trailer?.trailerKey}
             className="w-full aspect-video"
-            src={`https://www.youtube.com/embed/${trailer?.trailerKey}?autoplay=1&controls=0&mute=1&loop=1&playlist=${trailer?.trailerKey}`}
+            src={
+              IFRAME_URL_START +
+              `${trailer?.trailerKey}` +
+              IFRAME_URL_END +
+              `${trailer?.trailerKey}`
+            }
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
