@@ -139,7 +139,7 @@ const GptSearchBar = () => {
           {lang[langKey].search}
         </button>
         {geminiSearched && (
-          <div className="text-white ml-2 p-1 md:px-5 md:py-3 text-xs md:text-md bg-black bg-opacity-60 border border-red-600 rounded-lg">
+          <div className="text-white ml-2 p-1 md:px-5 md:py-3 text-xs md:text-md bg-black bg-opacity-60 border border-[#E50914] rounded-lg shadow-md shadow-[#E50914]">
             {formatTime(cooldownRemaining)}
           </div>
         )}
