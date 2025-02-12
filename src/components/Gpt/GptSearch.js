@@ -9,7 +9,7 @@ const GptSearch = () => {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black to-black opacity-50"></div>
         <img
-          className="w-screen min-h-screen sm:h-[90vh] object-cover"
+          className="w-screen min-h-screen sm:h-[90vh] object-cover bg-repeat"
           src={LOGIN_BG_IMAGE}
           alt="background_image"
         />

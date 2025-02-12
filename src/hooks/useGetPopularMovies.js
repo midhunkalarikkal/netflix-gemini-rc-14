@@ -2,14 +2,10 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addPopularMovies } from "../utils/movieSlice";
-import { fetchMovieTrailer } from "../utils/fetchMovieTrailers";
-import { fetchMoviePosterAndLogo } from "../utils/fetchMoviePosterAndLogo";
 
 const useGetPopularMovies = () => {
   const dispatch = useDispatch();
-  let list = "popularMovies";
-
-
+  
   useEffect(() => {
     const getPopularMovies = async () => {
       const data = await fetch(
@@ -18,10 +14,6 @@ const useGetPopularMovies = () => {
       );
       const json = await data.json();
       dispatch(addPopularMovies(json.results));
-      json.results.forEach((movie) => {
-        fetchMoviePosterAndLogo(movie.id, dispatch);
-        fetchMovieTrailer(movie.id,list, dispatch);
-      });
     };
 
     getPopularMovies();

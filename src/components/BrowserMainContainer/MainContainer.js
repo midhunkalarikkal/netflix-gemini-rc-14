@@ -5,18 +5,18 @@ import VideoTitleShimmer from "../Shimmer/VideoTitleShimmer";
 import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
 
 const MainContainer = () => {
-  const movies = useSelector((store) => store.movies?.nowPlayingMovies);
-
-  if (!movies || movies.length === 0) return;
-
+  const movies = useSelector((store) => store.movies?.nowPlayingMovies);  
   const random = Math.floor(Math.random() * movies?.length);
-
   const mainMovie = movies ? movies[random] : "";
-  const { original_title, overview, id } = mainMovie;
+  const movieData = {
+    original_title : mainMovie.original_title,
+    overview : mainMovie.overview,
+    id : mainMovie.id
+  }
 
   return (
       <div className="relative">
-        {!movies || !mainMovie ? (
+        {!movies || movies.length === 0 ? (
           <>
           <div className="absolute bg-gradient-to-r from-black w-screen aspect-video">
             <VideoTitleShimmer />
@@ -25,12 +25,8 @@ const MainContainer = () => {
           </>
         ) : (
           <>
-          <VideoTitle
-          original_title={original_title}
-          overview={overview}
-          id={id}
-          />
-          <VideoBackground movieId={id} />
+          <VideoTitle movie={movieData}/>
+          <VideoBackground id={mainMovie.id} />
           </>
         )}
           </div>

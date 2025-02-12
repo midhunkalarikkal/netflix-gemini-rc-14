@@ -4,11 +4,11 @@ const movieSlice = createSlice({
   name: "movies",
   initialState: {
     nowPlayingMovies: null,
-    trailerVideo: [],
     popularMovies: null,
     topRatedMovies: null,
     upcomingMovies: null,
-    metaData: [],
+    logos: [],
+    trailerVideos: [],
     selectedMovie: null,
     selectedForLarge: null,
   },
@@ -17,11 +17,11 @@ const movieSlice = createSlice({
       state.nowPlayingMovies = action.payload;
     },
     addTrailerVideo: (state, action) => {
-      const exist = state.trailerVideo.some(
-        (data) => data.movieId === action.payload.movieId
+      const exist = state.trailerVideos.some(
+        (data) => data.movieId === action.payload.id
       );
       if (!exist) {
-        state.trailerVideo.push(action.payload);
+        state.trailerVideos.push(action.payload);
       }
     },
     addPopularMovies: (state, action) => {
@@ -33,12 +33,12 @@ const movieSlice = createSlice({
     addUpcomingMovies: (state, action) => {
       state.upcomingMovies = action.payload;
     },
-    addMetaData: (state, action) => {
-      const exist = state.metaData.some(
+    addLogo: (state, action) => {
+      const exist = state.logos.some(
         (data) => data.id === action.payload.id
       );
       if (!exist) {
-        state.metaData.push(action.payload);
+        state.logos.push(action.payload);
       }
     },
     addSelectedMovie: (state, action) => {
@@ -55,7 +55,7 @@ export const {
   addPopularMovies,
   addTopRatedMovies,
   addUpcomingMovies,
-  addMetaData,
+  addLogo,
   addSelectedMovie,
   addSelectedForLarge,
 } = movieSlice.actions;

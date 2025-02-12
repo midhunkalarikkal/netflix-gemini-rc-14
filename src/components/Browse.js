@@ -27,7 +27,7 @@ const Browse = () => {
       ) : (
         <>
         <MainContainer />
-        <SecondaryContainer />
+        {/* <SecondaryContainer /> */}
         </>
       )}
        {fullScreen && 

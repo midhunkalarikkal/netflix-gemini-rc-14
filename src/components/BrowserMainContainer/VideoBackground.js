@@ -1,34 +1,49 @@
-import { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
+import { API_OPTIONS } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
+import { addTrailerVideo } from "../../utils/movieSlice";
 import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
-import { toggleMainContainerVideoBackgroundLoading } from "../../utils/loadingSlice";
 
-const VideoBackground = ({ movieId }) => {
+const VideoBackground = React.memo(({ id }) => {
+  console.log("videoBackground")
+
   const dispatch = useDispatch();
-  const trailerData = useSelector((store) =>
-    store.movies?.trailerVideo.find((trailer) => trailer.movieId === movieId)
-  );
-  const mainContainerVideoBackgroundLoading = useSelector(
-    (store) => store.loading?.mainContainerVideoBackgroundLoading
-  );
+  const trailers = useSelector((store) => store.movies?.trailerVideos);
+  const trailer = useMemo(() => trailers.find((trailer) => trailer.id === id), [trailers, id]);
+  
+  const fetchTrailer = useCallback(async (movieId) => {
+    if (!movieId) return;
+    const data = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+      API_OPTIONS
+    );
+    const json = await data.json();
+  
+    const filterData = json.results.filter((video) => video.type === "Trailer");
+    const trailer = filterData.length ? filterData[0] : json.results[0];
+  
+    dispatch(addTrailerVideo({
+      trailerKey: trailer?.key,
+      id: movieId,
+    }));
+  }, [dispatch]);
 
   useEffect(() => {
-    if (trailerData?.trailer) {
-      setTimeout(() => {
-        dispatch(toggleMainContainerVideoBackgroundLoading(false));
-      }, 2000);
+    if (id && !trailer) {
+      fetchTrailer(id);
     }
-  }, [trailerData, dispatch]);
+  }, [id, trailer]);
 
   return (
     <>
-      {mainContainerVideoBackgroundLoading ? (
+      {!trailer ? (
         <VideoBackgroundShimmer />
       ) : (
         <div className="w-full">
           <iframe
+            key={trailer?.trailerKey}
             className="w-full aspect-video"
-            src={`https://www.youtube.com/embed/${trailerData?.trailer?.key}?autoplay=1&controls=0&mute=1&loop=1&playlist=${trailerData?.trailer?.key}`}
+            src={`https://www.youtube.com/embed/${trailer?.trailerKey}?autoplay=1&controls=0&mute=1&loop=1&playlist=${trailer?.trailerKey}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
@@ -36,6 +51,6 @@ const VideoBackground = ({ movieId }) => {
       )}
     </>
   );
-};
+});
 
 export default VideoBackground;

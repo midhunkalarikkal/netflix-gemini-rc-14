@@ -6,6 +6,7 @@ import { addSelectedMovie } from "../../utils/movieSlice";
 const MovieCard = React.memo(({ movieId, title }) => {
   const dispatch = useDispatch();
   const [imageLoading, setImageLoading] = useState(true);
+  
   let movieToSelect = {};
   const metaData = useSelector((store) =>
     store.movies?.metaData.find((movie) => movie.id === movieId)

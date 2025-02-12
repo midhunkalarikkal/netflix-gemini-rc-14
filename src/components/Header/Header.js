@@ -82,7 +82,7 @@ const Header = () => {
           {showGeminiSearch && (
             <select
               onChange={(e) => handleSelect(e.target.value)}
-              className="md:block h-8 px-1 md:px-2 bg-black text-white rounded-md shadow border border-red-600 focus:outline-none"
+              className="md:block h-8 px-1 md:px-2 bg-black text-white rounded-md shadow border hover:border-red-600 focus:outline-none"
             >
               {supportedLanguages.map((lang) => (
                 <option
