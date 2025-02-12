@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "netflix-gemini-rc-14",
     "public": "build",
     "ignore": [
       "firebase.json",
