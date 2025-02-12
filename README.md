@@ -15,6 +15,7 @@ Welcome to my **Netflix Clone** project! This is more than just a Netflix UI rep
 - **React Toastify** (for notifications)
 - **Firebase** (for authentication & hosting)
 - **Google Generative AI** (`@google/generative-ai` for Gemini-powered recommendations)
+- **Dynamic Language Changing** (Implemented for the Gemini-powered recommendation page using Redux)
 
 ### **Development Dependencies:**
 - **Redux Toolkit**
