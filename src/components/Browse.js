@@ -1,6 +1,6 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import GptSearch from "./Gpt/GptSearch";
+import GeminiSearch from "./Gemini/GeminiSearch";
 import { useSelector } from "react-redux";
 import useGetPopularMovies from "../hooks/useGetPopularMovies";
 import BigTrailer from "./BrowserSecondaryContainer/BigTrailer";
@@ -28,7 +28,7 @@ const Browse = () => {
        }
 
       {showGeminiSearch ? (
-        <GptSearch />
+        <GeminiSearch />
       ) : (
         <>
         <MainContainer />

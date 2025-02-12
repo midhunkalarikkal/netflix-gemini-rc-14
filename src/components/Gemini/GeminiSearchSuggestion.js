@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import MovieList from "../BrowserSecondaryContainer/MovieList";
 
-const GptSearchSuggestions = () => {
+const GeminiSearchSuggestion = () => {
   
   const { movieNames, geminiMovieResults } = useSelector(
     (store) => store.gemini
@@ -24,4 +24,4 @@ const GptSearchSuggestions = () => {
   );
 };
 
-export default GptSearchSuggestions;
+export default GeminiSearchSuggestion;

@@ -156,7 +156,7 @@ const Header = () => {
                   className="text-center py-2 font-medium border-b border-gray-500 cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"
                   onClick={handleGeminiSearch}
                 >
-                  {!showGeminiSearch ? "GPT Search" : "Home"}
+                  {!showGeminiSearch ? "Gemini Search" : "Home"}
                 </li>
                 <li
                   className="text-center py-2 font-medium cursor-pointer hover:bg-[#b20710] rounded text-xs sm:text-sm"

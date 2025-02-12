@@ -1,9 +1,9 @@
 import React from "react";
-import GptSearchBar from "./GptSearchBar";
+import GeminiSearchBar from "./GeminiSearchBar";
 import { LOGIN_BG_IMAGE } from "../../utils/constants";
-import GptSearchSuggestions from "./GptSearchSuggestions";
+import GeminiSearchSuggestion from "./GeminiSearchSuggestion";
 
-const GptSearch = () => {
+const GeminiSearch = () => {
 
   return (
     <div className="w-screen min-h-screen pt-10 md:p-10 relative">
@@ -16,13 +16,13 @@ const GptSearch = () => {
         />
       </div>
       <div className="relative z-10 flex flex-col items-center">
-        <GptSearchBar />
+        <GeminiSearchBar />
         <div className="w-full max-h-[85vh] md:max-h-[70vh] overflow-y-auto no-scrollbar">
-          <GptSearchSuggestions />
+          <GeminiSearchSuggestion />
         </div>
       </div>
     </div>
   );
 };
 
-export default GptSearch;
+export default GeminiSearch;
