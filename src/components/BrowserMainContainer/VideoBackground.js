@@ -3,7 +3,7 @@ import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
 import useFetchTrailer from "../../hooks/useFetchTrailer";
 
 const VideoBackground = React.memo(({ id }) => {
-  console.log("videoBackground")
+  
   const trailer = useFetchTrailer(id);
 
   return (

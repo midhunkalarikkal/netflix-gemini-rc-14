@@ -4,7 +4,6 @@ import VideoTitleShimmer from "../Shimmer/VideoTitleShimmer";
 import useFetchLogo from "../../hooks/useFetchLogo";
 
 const VideoTitle = React.memo(({ movie }) => {
-  console.log("VideoTitle Rendered");
 
   const { original_title, overview, id } = movie;
   const logo = useFetchLogo(id);
