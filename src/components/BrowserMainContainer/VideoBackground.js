@@ -1,38 +1,10 @@
-import React, { useCallback, useEffect, useMemo } from "react";
-import { API_OPTIONS } from "../../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrailerVideo } from "../../utils/movieSlice";
+import React from "react";
 import VideoBackgroundShimmer from "../Shimmer/VideoBackgroundShimmer";
+import useFetchTrailer from "../../hooks/useFetchTrailer";
 
 const VideoBackground = React.memo(({ id }) => {
   console.log("videoBackground")
-
-  const dispatch = useDispatch();
-  const trailers = useSelector((store) => store.movies?.trailerVideos);
-  const trailer = useMemo(() => trailers.find((trailer) => trailer.id === id), [trailers, id]);
-  
-  const fetchTrailer = useCallback(async (movieId) => {
-    if (!movieId) return;
-    const data = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-      API_OPTIONS
-    );
-    const json = await data.json();
-  
-    const filterData = json.results.filter((video) => video.type === "Trailer");
-    const trailer = filterData.length ? filterData[0] : json.results[0];
-  
-    dispatch(addTrailerVideo({
-      trailerKey: trailer?.key,
-      id: movieId,
-    }));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (id && !trailer) {
-      fetchTrailer(id);
-    }
-  }, [id, trailer]);
+  const trailer = useFetchTrailer(id);
 
   return (
     <>

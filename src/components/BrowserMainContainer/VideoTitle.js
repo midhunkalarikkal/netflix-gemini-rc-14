@@ -1,37 +1,13 @@
-import React, { useCallback, useEffect, useMemo } from "react";
-import { addLogo } from "../../utils/movieSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { API_OPTIONS, IMG_CDN } from "../../utils/constants";
+import React from "react";
+import { IMG_CDN } from "../../utils/constants";
 import VideoTitleShimmer from "../Shimmer/VideoTitleShimmer";
+import useFetchLogo from "../../hooks/useFetchLogo";
 
 const VideoTitle = React.memo(({ movie }) => {
-  console.log("videoTitle")
+  console.log("VideoTitle Rendered");
+
   const { original_title, overview, id } = movie;
-
-  const dispatch = useDispatch();
-  const logos = useSelector((store) => store.movies.logos);
-  const logo = useMemo(() => logos.find((logo) => logo.id === id), [logos, id]);
-
-  const fetchLogo = useCallback(async (movieId) => {
-    if (!movieId) return;
-    const data = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/images?language=en-US&include_image_language=en,null`,
-      API_OPTIONS
-    );
-    const json = await data.json();
-    
-    const id = json?.id;
-    const logo = json?.logos.find((poster) => poster?.iso_639_1 === "en") || json?.logos[0];
-    const logoPath = logo?.file_path || "";  
-  
-    dispatch(addLogo({ id, logoPath }));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (id && !logo) {
-      fetchLogo(id);
-    }
-  }, [id, logo]); 
+  const logo = useFetchLogo(id);
 
 
   return (
