@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCzvIfxZd3yZmcNFRKpAZoWFwxqaEi48Fw",
-  authDomain: "netflix-gemini-rc.firebaseapp.com",
-  projectId: "netflix-gemini-rc",
-  storageBucket: "netflix-gemini-rc.firebasestorage.app",
-  messagingSenderId: "616008418575",
-  appId: "1:616008418575:web:f4a42ef8a6f4bee2542a7a",
-  measurementId: "G-P9WV0W9RP8"
+  apiKey: process.env.REACT_APP_FIREBASE_API,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGINSENDERID,
+  appId: process.env.REACT_APP_APPID,
+  measurementId: process.env.REACT_APP_MEASUREMENTID
 };
 
 const app = initializeApp(firebaseConfig);
